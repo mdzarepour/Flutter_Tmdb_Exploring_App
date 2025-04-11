@@ -9,6 +9,7 @@ import 'package:movie_app/components/widgets/list_view_item.dart';
 import 'package:movie_app/components/widgets/loading.dart';
 import 'package:movie_app/components/widgets/slider_item.dart';
 import 'package:movie_app/models/movie.dart';
+import 'package:movie_app/screens/details_screen.dart';
 import 'package:movie_app/services/movie_service.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -18,13 +19,23 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final FocusNode _focusNode = FocusNode();
+  final TextEditingController _searchController = TextEditingController();
   late Future<List<Movie>> popularMovies;
   late Future<List<Movie>> ratedMovies;
   late Future<List<Movie>> upcominMovies;
+
   @override
   void initState() {
     super.initState();
     _fetchMovieData();
+  }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    _searchController.dispose();
+    super.dispose();
   }
 
   _fetchMovieData() async {
@@ -50,34 +61,58 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     TextTheme textTheme = Theme.of(context).textTheme;
-    return Scaffold(
-      appBar: _buildAppBar(),
-      body: SafeArea(
-        child: RefreshIndicator(
-          color: SolidColors.redColor,
-          onRefresh: () async => await _fetchMovieData(),
-          child: SingleChildScrollView(
-            child: Center(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Column(
-                  children: [
-                    SizedBox(height: 20),
-                    _buildSearchTextField(size, textTheme),
-                    SizedBox(height: 40),
-                    CategoriTitle(text: 'Popular Movies'),
-                    SizedBox(height: 20),
-                    _buildCarouselSlider(textTheme, size),
-                    SizedBox(height: 40),
-                    CategoriTitle(text: 'Top Rated Movies'),
-                    SizedBox(height: 20),
-                    _buildCategoryListView(size, ratedMovies),
-                    SizedBox(height: 30),
-                    CategoriTitle(text: 'Upcoming Movies'),
-                    SizedBox(height: 20),
-                    _buildCategoryListView(size, upcominMovies),
-                    SizedBox(height: 30),
-                  ],
+    return GestureDetector(
+      onTap: () => _focusNode.unfocus(),
+      child: Scaffold(
+        appBar: _buildAppBar(),
+        body: SafeArea(
+          child: RefreshIndicator(
+            color: SolidColors.redColor,
+            onRefresh: () async => await _fetchMovieData(),
+            child: SingleChildScrollView(
+              child: Center(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8),
+                  child: Column(
+                    children: [
+                      SizedBox(height: 20),
+                      Container(
+                        width: size.width * 0.8,
+                        height: 45,
+                        decoration: BoxDecoration(
+                          color: SolidColors.primaryGrayColor,
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        child: TextField(
+                          controller: _searchController,
+                          style: textTheme.titleSmall,
+                          textAlignVertical: TextAlignVertical.center,
+                          cursorColor: SolidColors.whiteColor,
+                          decoration: InputDecoration(
+                            hintText: 'Search',
+                            hintStyle: textTheme.titleSmall,
+                            prefixIcon: HugeIcon(
+                              icon: HugeIcons.strokeRoundedSearch01,
+                              color: SolidColors.secondaryGrayColor,
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 40),
+                      CategoriTitle(text: 'Popular Movies'),
+                      SizedBox(height: 20),
+                      _buildCarouselSlider(textTheme, size),
+                      SizedBox(height: 40),
+                      CategoriTitle(text: 'Top Rated Movies'),
+                      SizedBox(height: 20),
+                      _buildCategoryListView(size, ratedMovies),
+                      SizedBox(height: 30),
+                      CategoriTitle(text: 'Upcoming Movies'),
+                      SizedBox(height: 20),
+                      _buildCategoryListView(size, upcominMovies),
+                      SizedBox(height: 30),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -152,33 +187,6 @@ class _HomeScreenState extends State<HomeScreen> {
             return Loading();
           }
         },
-      ),
-    );
-  }
-
-  // textField just for Ui =>
-  Center _buildSearchTextField(Size size, TextTheme texttheme) {
-    return Center(
-      child: Container(
-        width: size.width / 1.25,
-        height: 45,
-        decoration: BoxDecoration(
-          color: SolidColors.primaryGrayColor,
-          borderRadius: BorderRadius.all(Radius.circular(16)),
-        ),
-        child: TextField(
-          style: texttheme.titleSmall,
-          textAlignVertical: TextAlignVertical.center,
-          cursorColor: SolidColors.whiteColor,
-          decoration: InputDecoration(
-            hintText: 'Search',
-            hintStyle: texttheme.titleSmall,
-            prefixIcon: HugeIcon(
-              icon: HugeIcons.strokeRoundedSearch01,
-              color: SolidColors.secondaryGrayColor,
-            ),
-          ),
-        ),
       ),
     );
   }

@@ -40,37 +40,39 @@ class _DetailsScreenState extends State<DetailsScreen> {
           color: SolidColors.redColor,
           onRefresh: () async => await _getMovieDetails(),
           child: ListView(
-              physics: const AlwaysScrollableScrollPhysics(),
-              children: [
-                FutureBuilder(
-                  future: movieDetails,
-                  builder: (context, snapshot) {
-                    // eror condition =>
-                    if (snapshot.hasError) {
-                      return ConnectionErrorMessage(
-                          message: 'Oops please refresh the page');
-                      // loading condition =>
-                    } else if (snapshot.connectionState ==
-                        ConnectionState.waiting) {
-                      return Loading();
-                    } else {
-                      // accurate condition =>
-                      return SafeArea(
-                        child: Center(
-                          child: Column(
-                            children: [
-                              _buildPosterStack(size, snapshot, textTheme),
-                              SizedBox(height: 30),
-                              _buildDetailsRow(snapshot, textTheme),
-                              _buildOverView(snapshot, textTheme)
-                            ],
-                          ),
+            physics: const AlwaysScrollableScrollPhysics(),
+            children: [
+              FutureBuilder(
+                future: movieDetails,
+                builder: (context, snapshot) {
+                  // eror condition =>
+                  if (snapshot.hasError) {
+                    return ConnectionErrorMessage(
+                      message: 'Oops please refresh the page',
+                    );
+                    // loading condition =>
+                  } else if (snapshot.connectionState ==
+                      ConnectionState.waiting) {
+                    return Loading();
+                  } else {
+                    // accurate condition =>
+                    return SafeArea(
+                      child: Center(
+                        child: Column(
+                          children: [
+                            _buildPosterStack(size, snapshot, textTheme),
+                            SizedBox(height: 30),
+                            _buildDetailsRow(snapshot, textTheme),
+                            _buildOverView(snapshot, textTheme),
+                          ],
                         ),
-                      );
-                    }
-                  },
-                ),
-              ]),
+                      ),
+                    );
+                  }
+                },
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -87,7 +89,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
     );
   }
 
-// the row contains date,popularity,language =>
+  // the row contains date,popularity,language =>
   Row _buildDetailsRow(AsyncSnapshot<Movie> snapshot, TextTheme textTheme) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -106,8 +108,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
           spacing: 10,
           children: [
             Icon(HugeIcons.strokeRoundedTicket01),
-            Text(snapshot.data!.popularity.toString().substring(0, 6),
-                style: textTheme.headlineSmall),
+            Text(
+              snapshot.data!.popularity.toString().substring(0, 6),
+              style: textTheme.headlineSmall,
+            ),
           ],
         ),
         _buildDivider(),
@@ -119,7 +123,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
             Text(
               snapshot.data!.originalLanguage,
               style: textTheme.headlineSmall,
-            )
+            ),
           ],
         ),
       ],
@@ -128,19 +132,17 @@ class _DetailsScreenState extends State<DetailsScreen> {
 
   // the stack contains backdrop image,rating,poster,title =>
   Stack _buildPosterStack(
-      Size size, AsyncSnapshot<Movie> snapshot, TextTheme textTheme) {
+    Size size,
+    AsyncSnapshot<Movie> snapshot,
+    TextTheme textTheme,
+  ) {
     return Stack(
       children: [
         // all stack container =>
-        SizedBox(
-          width: size.width,
-          height: 350,
-        ),
+        SizedBox(width: size.width, height: 350),
         // backdrop image =>
         ClipRRect(
-          borderRadius: BorderRadius.vertical(
-            bottom: Radius.circular(15),
-          ),
+          borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
           child: SizedBox(
             width: size.width,
             height: 265,
@@ -148,8 +150,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
               fit: BoxFit.cover,
               alignment: Alignment.topCenter,
               imageUrl: snapshot.data!.backDropPath,
-              errorWidget: (context, url, error) =>
-                  ConnectionErrorMessage(message: 'image not found'),
+              errorWidget:
+                  (context, url, error) =>
+                      ConnectionErrorMessage(message: 'image not found'),
               placeholder: (context, url) => Loading(),
             ),
           ),
@@ -176,8 +179,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
           right: 10,
           child: Container(
             decoration: BoxDecoration(
-                gradient: GradientColors.ratingGradientColor,
-                borderRadius: BorderRadius.all(Radius.circular(20))),
+              gradient: GradientColors.ratingGradientColor,
+              borderRadius: BorderRadius.all(Radius.circular(20)),
+            ),
             width: 75,
             height: 30,
             child: Row(
@@ -189,8 +193,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   color: SolidColors.yellowColor,
                 ),
                 Text(
-                    style: textTheme.titleMedium,
-                    snapshot.data!.voteAverage.toString().substring(0, 3)),
+                  style: textTheme.titleMedium,
+                  snapshot.data!.voteAverage.toString().substring(0, 3),
+                ),
               ],
             ),
           ),
@@ -227,10 +232,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
           color: SolidColors.whiteColor,
         ),
       ),
-      title: Text(
-        'Details',
-        style: textTheme.titleLarge,
-      ),
+      title: Text('Details', style: textTheme.titleLarge),
     );
   }
 
