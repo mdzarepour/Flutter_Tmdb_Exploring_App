@@ -43,11 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
         url: ApiStrings.upcomingVideosUrl,
       );
     });
-    await Future.wait([
-      popularMovies,
-      ratedMovies,
-      upcominMovies,
-    ]);
+    await Future.wait([popularMovies, ratedMovies, upcominMovies]);
   }
 
   @override
@@ -91,7 +87,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-// popular videos slider =>
+  // popular videos slider =>
   SizedBox _buildCarouselSlider(TextTheme textTheme, Size size) {
     return SizedBox(
       height: size.height / 2.95,
@@ -101,7 +97,8 @@ class _HomeScreenState extends State<HomeScreen> {
           //error condition ----------------->
           if (snapshot.hasError) {
             return ConnectionErrorMessage(
-                message: 'Oops we have error on popular movies');
+              message: 'Oops we have error on popular movies',
+            );
             // accurate condition ----------------->
           } else if (snapshot.hasData) {
             return CarouselSlider.builder(
@@ -114,11 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 enlargeCenterPage: true,
               ),
               itemBuilder: (context, index, realIndex) {
-                return SliderItem(
-                  index: index,
-                  snapshot: snapshot,
-                  size: size,
-                );
+                return SliderItem(index: index, snapshot: snapshot, size: size);
               },
             );
             // waiting condition ----------------->
@@ -130,7 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-// top rated & upcoming videos ListView =>
+  // top rated & upcoming videos ListView =>
   SizedBox _buildCategoryListView(Size size, Future<List<Movie>> futureList) {
     return SizedBox(
       height: 200,
@@ -150,10 +143,7 @@ class _HomeScreenState extends State<HomeScreen> {
               itemBuilder: (context, index) {
                 return Padding(
                   padding: EdgeInsets.only(left: index == 0 ? 0 : 20),
-                  child: ListViewItem(
-                    index: index,
-                    snapshot: snapshot,
-                  ),
+                  child: ListViewItem(index: index, snapshot: snapshot),
                 );
               },
             );
@@ -166,7 +156,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-// textField just for Ui =>
+  // textField just for Ui =>
   Center _buildSearchTextField(Size size, TextTheme texttheme) {
     return Center(
       child: Container(
@@ -174,9 +164,7 @@ class _HomeScreenState extends State<HomeScreen> {
         height: 45,
         decoration: BoxDecoration(
           color: SolidColors.primaryGrayColor,
-          borderRadius: BorderRadius.all(
-            Radius.circular(16),
-          ),
+          borderRadius: BorderRadius.all(Radius.circular(16)),
         ),
         child: TextField(
           style: texttheme.titleSmall,
@@ -186,8 +174,9 @@ class _HomeScreenState extends State<HomeScreen> {
             hintText: 'Search',
             hintStyle: texttheme.titleSmall,
             prefixIcon: HugeIcon(
-                icon: HugeIcons.strokeRoundedSearch01,
-                color: SolidColors.secondaryGrayColor),
+              icon: HugeIcons.strokeRoundedSearch01,
+              color: SolidColors.secondaryGrayColor,
+            ),
           ),
         ),
       ),
@@ -195,8 +184,6 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   AppBar _buildAppBar() {
-    return AppBar(
-      title: Text('Movie App'),
-    );
+    return AppBar(title: Text('Movie App'));
   }
 }

@@ -42,7 +42,7 @@ packages:
     source: hosted
     version: "1.3.1"
   carousel_slider:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: carousel_slider
       sha256: "7b006ec356205054af5beaef62e2221160ea36b90fb70a35e4deacd49d0349ae"
@@ -188,7 +188,7 @@ packages:
     source: hosted
     version: "4.1.2"
   hugeicons:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: hugeicons
       sha256: d7dd54ca1faf91b12a4b5eb9d2ce2bce3066dc0cae7209c0ddfc29e7bb48c045
