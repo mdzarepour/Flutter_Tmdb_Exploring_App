@@ -50,16 +50,18 @@ class _SplashScreenState extends State<SplashScreen> {
           builder: (context, snapshot) {
             if (snapshot.hasData) {
               // accurate condition --->
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(
-                  builder:
-                      (context) => MainScreen(
-                        popularMovies: snapshot.data![0],
-                        ratedMovies: snapshot.data![1],
-                        upcomingMovies: snapshot.data![2],
-                      ),
-                ),
-              );
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                Navigator.of(context).pushReplacement(
+                  MaterialPageRoute(
+                    builder:
+                        (context) => MainScreen(
+                          popularMovies: snapshot.data![0],
+                          ratedMovies: snapshot.data![1],
+                          upcomingMovies: snapshot.data![2],
+                        ),
+                  ),
+                );
+              });
               // error condition --->
             } else if (snapshot.hasError) {
               OutlinedButton.icon(
@@ -72,14 +74,18 @@ class _SplashScreenState extends State<SplashScreen> {
               );
             } else {
               // waiting condition --->
-              return Column(
-                children: [
-                  Text(
-                    'Movie App',
-                    style: Theme.of(context).textTheme.titleLarge,
-                  ),
-                  Loading(),
-                ],
+              return Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  spacing: 20,
+                  children: [
+                    Text(
+                      'Movie App',
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                    Loading(),
+                  ],
+                ),
               );
             }
             return SizedBox.shrink();

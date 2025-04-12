@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/components/constants/colors.dart';
-import 'package:movie_app/screens/home_screen.dart';
 import 'package:movie_app/screens/splash_screen.dart';
 
 void main(List<String> args) {
@@ -23,6 +22,11 @@ class MovieApp extends StatelessWidget {
         appBarTheme: _getAppbarTheme(),
         textTheme: _getTextTheme(),
         inputDecorationTheme: _getTextFieldTheme(),
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          selectedItemColor: SolidColors.redColor,
+          unselectedItemColor: SolidColors.whiteColor,
+          backgroundColor: SolidColors.backGroundColor,
+        ),
       ),
       home: SplashScreen(),
     );

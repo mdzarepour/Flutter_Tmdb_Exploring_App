@@ -1,19 +1,23 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:hugeicons/hugeicons.dart';
-import 'package:movie_app/components/constants/colors.dart';
-import 'package:movie_app/components/constants/strings.dart';
 import 'package:movie_app/components/widgets/categori_title.dart';
 import 'package:movie_app/components/widgets/connection_error_message.dart';
 import 'package:movie_app/components/widgets/list_view_item.dart';
 import 'package:movie_app/components/widgets/loading.dart';
 import 'package:movie_app/components/widgets/slider_item.dart';
 import 'package:movie_app/models/movie.dart';
-import 'package:movie_app/screens/details_screen.dart';
-import 'package:movie_app/services/movie_service.dart';
 
+//TODO delete the futurebuilder from lists and add on entirely for screen
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  final List<Movie> popularMoveis;
+  final List<Movie> ratedMovies;
+  final List<Movie> upcomingMovies;
+  const HomeScreen({
+    super.key,
+    required this.popularMoveis,
+    required this.ratedMovies,
+    required this.upcomingMovies,
+  });
   @override
   State<StatefulWidget> createState() => _HomeScreenState();
 }
@@ -21,14 +25,10 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   final FocusNode _focusNode = FocusNode();
   final TextEditingController _searchController = TextEditingController();
-  late Future<List<Movie>> popularMovies;
-  late Future<List<Movie>> ratedMovies;
-  late Future<List<Movie>> upcominMovies;
 
   @override
   void initState() {
     super.initState();
-    _fetchMovieData();
   }
 
   @override
@@ -38,25 +38,6 @@ class _HomeScreenState extends State<HomeScreen> {
     super.dispose();
   }
 
-  _fetchMovieData() async {
-    MovieService movieService = MovieService();
-    setState(() {
-      popularMovies = movieService.getMovieList(
-        errorMessage: 'popular message error',
-        url: ApiStrings.popularVideosUrl,
-      );
-      ratedMovies = movieService.getMovieList(
-        errorMessage: 'rated message error',
-        url: ApiStrings.ratedVideosUrl,
-      );
-      upcominMovies = movieService.getMovieList(
-        errorMessage: 'upcoming message error',
-        url: ApiStrings.upcomingVideosUrl,
-      );
-    });
-    await Future.wait([popularMovies, ratedMovies, upcominMovies]);
-  }
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -64,55 +45,27 @@ class _HomeScreenState extends State<HomeScreen> {
     return GestureDetector(
       onTap: () => _focusNode.unfocus(),
       child: Scaffold(
-        appBar: _buildAppBar(),
         body: SafeArea(
-          child: RefreshIndicator(
-            color: SolidColors.redColor,
-            onRefresh: () async => await _fetchMovieData(),
-            child: SingleChildScrollView(
-              child: Center(
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8),
-                  child: Column(
-                    children: [
-                      SizedBox(height: 20),
-                      Container(
-                        width: size.width * 0.8,
-                        height: 45,
-                        decoration: BoxDecoration(
-                          color: SolidColors.primaryGrayColor,
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        child: TextField(
-                          controller: _searchController,
-                          style: textTheme.titleSmall,
-                          textAlignVertical: TextAlignVertical.center,
-                          cursorColor: SolidColors.whiteColor,
-                          decoration: InputDecoration(
-                            hintText: 'Search',
-                            hintStyle: textTheme.titleSmall,
-                            prefixIcon: HugeIcon(
-                              icon: HugeIcons.strokeRoundedSearch01,
-                              color: SolidColors.secondaryGrayColor,
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 40),
-                      CategoriTitle(text: 'Popular Movies'),
-                      SizedBox(height: 20),
-                      _buildCarouselSlider(textTheme, size),
-                      SizedBox(height: 40),
-                      CategoriTitle(text: 'Top Rated Movies'),
-                      SizedBox(height: 20),
-                      _buildCategoryListView(size, ratedMovies),
-                      SizedBox(height: 30),
-                      CategoriTitle(text: 'Upcoming Movies'),
-                      SizedBox(height: 20),
-                      _buildCategoryListView(size, upcominMovies),
-                      SizedBox(height: 30),
-                    ],
-                  ),
+          child: SingleChildScrollView(
+            child: Center(
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Column(
+                  children: [
+                    SizedBox(height: 20),
+                    CategoriTitle(text: 'Popular Movies'),
+                    SizedBox(height: 20),
+                    _buildCarouselSlider(textTheme, size),
+                    SizedBox(height: 40),
+                    CategoriTitle(text: 'Top Rated Movies'),
+                    SizedBox(height: 20),
+                    _buildCategoryListView(size, widget.ratedMovies),
+                    SizedBox(height: 30),
+                    CategoriTitle(text: 'Upcoming Movies'),
+                    SizedBox(height: 20),
+                    _buildCategoryListView(size, widget.upcomingMovies),
+                    SizedBox(height: 30),
+                  ],
                 ),
               ),
             ),
@@ -122,76 +75,69 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  // popular videos slider =>
+  // popular videos slider --->
   SizedBox _buildCarouselSlider(TextTheme textTheme, Size size) {
     return SizedBox(
       height: size.height / 2.95,
-      child: FutureBuilder(
-        future: popularMovies,
-        builder: (context, snapshot) {
-          //error condition ----------------->
-          if (snapshot.hasError) {
-            return ConnectionErrorMessage(
-              message: 'Oops we have error on popular movies',
-            );
-            // accurate condition ----------------->
-          } else if (snapshot.hasData) {
-            return CarouselSlider.builder(
-              itemCount: snapshot.data!.length,
-              options: CarouselOptions(
-                height: size.height / 2.95,
-                autoPlay: true,
-                autoPlayCurve: Curves.easeInOut,
-                viewportFraction: 0.55,
-                enlargeCenterPage: true,
-              ),
-              itemBuilder: (context, index, realIndex) {
-                return SliderItem(index: index, snapshot: snapshot, size: size);
-              },
-            );
-            // waiting condition ----------------->
-          } else {
-            return Loading();
-          }
+      child: CarouselSlider.builder(
+        itemCount: widget.popularMoveis.length,
+        options: CarouselOptions(
+          height: size.height / 2.95,
+          autoPlay: true,
+          autoPlayCurve: Curves.easeInOut,
+          viewportFraction: 0.55,
+          enlargeCenterPage: true,
+        ),
+        itemBuilder: (context, index, realIndex) {
+          return SliderItem(
+            index: index,
+            list: widget.popularMoveis,
+            size: size,
+          );
         },
       ),
     );
   }
 
-  // top rated & upcoming videos ListView =>
-  SizedBox _buildCategoryListView(Size size, Future<List<Movie>> futureList) {
+  // top rated & upcoming videos ListView --->
+  SizedBox _buildCategoryListView(Size size, List<Movie> list) {
     return SizedBox(
       height: 200,
-      child: FutureBuilder(
-        future: futureList,
-        builder: (context, snapshot) {
-          // error condition =>
-          if (snapshot.hasError) {
-            return ConnectionErrorMessage(
-              message: 'Check Your Connection ,Refresh The Page',
-            );
-            // accurate condition =>
-          } else if (snapshot.hasData) {
-            return ListView.builder(
-              itemCount: snapshot.data!.length,
-              scrollDirection: Axis.horizontal,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: EdgeInsets.only(left: index == 0 ? 0 : 20),
-                  child: ListViewItem(index: index, snapshot: snapshot),
-                );
-              },
-            );
-          } else {
-            // waiting condition =>
-            return Loading();
-          }
+      child: ListView.builder(
+        itemCount: list.length,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: EdgeInsets.only(left: index == 0 ? 0 : 20),
+            child: ListViewItem(index: index, list: list),
+          );
         },
       ),
     );
   }
-
-  AppBar _buildAppBar() {
-    return AppBar(title: Text('Movie App'));
-  }
 }
+
+
+
+                    // Container(
+                    //   width: size.width * 0.8,
+                    //   height: 45,
+                    //   decoration: BoxDecoration(
+                    //     color: SolidColors.primaryGrayColor,
+                    //     borderRadius: BorderRadius.circular(16),
+                    //   ),
+                    //   child: TextField(
+                    //     controller: _searchController,
+                    //     style: textTheme.titleSmall,
+                    //     textAlignVertical: TextAlignVertical.center,
+                    //     cursorColor: SolidColors.whiteColor,
+                    //     decoration: InputDecoration(
+                    //       hintText: 'Search',
+                    //       hintStyle: textTheme.titleSmall,
+                    //       prefixIcon: HugeIcon(
+                    //         icon: HugeIcons.strokeRoundedSearch01,
+                    //         color: SolidColors.secondaryGrayColor,
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),

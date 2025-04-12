@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:movie_app/components/constants/colors.dart';
 import 'package:movie_app/components/widgets/loading.dart';
+import 'package:movie_app/models/movie.dart';
 import 'package:movie_app/screens/details_screen.dart';
 
 class ListViewItem extends StatelessWidget {
-  final AsyncSnapshot snapshot;
+  final List<Movie> list;
   final int index;
-  const ListViewItem({super.key, required this.snapshot, required this.index});
+  const ListViewItem({super.key, required this.list, required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +20,8 @@ class ListViewItem extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-              builder: (context) =>
-                  DetailsScreen(movieId: snapshot.data[index].id)),
+            builder: (context) => DetailsScreen(movieId: list[index].id),
+          ),
         );
       },
       // popular and upcoming movies list item =>
@@ -38,11 +39,12 @@ class ListViewItem extends StatelessWidget {
                 child: CachedNetworkImage(
                   alignment: Alignment.topCenter,
                   fit: BoxFit.cover,
-                  imageUrl: snapshot.data[index].posterPath,
-                  errorWidget: (context, url, error) => Icon(
-                    HugeIcons.strokeRoundedImage02,
-                    color: SolidColors.secondaryGrayColor,
-                  ),
+                  imageUrl: list[index].posterPath,
+                  errorWidget:
+                      (context, url, error) => Icon(
+                        HugeIcons.strokeRoundedImage02,
+                        color: SolidColors.secondaryGrayColor,
+                      ),
                   placeholder: (context, url) => Loading(),
                 ),
               ),
@@ -51,10 +53,10 @@ class ListViewItem extends StatelessWidget {
             Text(
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.titleMedium,
-              snapshot.data[index].originalTitle,
+              list[index].originalTitle,
               maxLines: 1,
               softWrap: true,
-            )
+            ),
           ],
         ),
       ),
