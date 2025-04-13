@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/components/constants/colors.dart';
-import 'package:movie_app/screens/splash_screen.dart';
+import 'package:movie_app/screens/main_screen.dart';
 
 void main(List<String> args) {
   runApp(MovieApp());
@@ -28,7 +28,7 @@ class MovieApp extends StatelessWidget {
           backgroundColor: SolidColors.backGroundColor,
         ),
       ),
-      home: SplashScreen(),
+      home: MainScreen(),
     );
   }
 
