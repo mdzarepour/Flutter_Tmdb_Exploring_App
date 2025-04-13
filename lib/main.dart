@@ -60,28 +60,28 @@ class MovieApp extends StatelessWidget {
   TextTheme _getTextTheme() {
     return TextTheme(
       bodyMedium: TextStyle(color: Colors.white),
-      // header bold title theme =>
+      // header bold title theme --->
       titleLarge: TextStyle(
         color: SolidColors.whiteColor,
         fontSize: 18,
         fontFamily: 'Poppins_SemiBold',
         fontWeight: FontWeight.w700,
       ),
-      // body texts theme =>
+      // body texts theme --->
       titleMedium: TextStyle(
         color: SolidColors.whiteColor,
         fontSize: 14,
         fontFamily: 'Poppins_Medium',
         fontWeight: FontWeight.w400,
       ),
-      // search textField theme =>
+      // search textField theme --->
       titleSmall: TextStyle(
         color: SolidColors.secondaryGrayColor,
         fontSize: 16,
         fontFamily: 'Poppins_Medium',
         fontWeight: FontWeight.w400,
       ),
-      // icons title theme =>
+      // icons title theme --->
       headlineSmall: TextStyle(
         color: SolidColors.secondaryGrayColor,
         fontSize: 12,

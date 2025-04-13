@@ -7,7 +7,6 @@ import 'package:movie_app/components/widgets/loading.dart';
 import 'package:movie_app/components/widgets/slider_item.dart';
 import 'package:movie_app/models/movie.dart';
 
-//TODO delete the futurebuilder from lists and add on entirely for screen
 class HomeScreen extends StatefulWidget {
   final List<Movie> popularMoveis;
   final List<Movie> ratedMovies;
@@ -116,28 +115,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-
-
-
-                    // Container(
-                    //   width: size.width * 0.8,
-                    //   height: 45,
-                    //   decoration: BoxDecoration(
-                    //     color: SolidColors.primaryGrayColor,
-                    //     borderRadius: BorderRadius.circular(16),
-                    //   ),
-                    //   child: TextField(
-                    //     controller: _searchController,
-                    //     style: textTheme.titleSmall,
-                    //     textAlignVertical: TextAlignVertical.center,
-                    //     cursorColor: SolidColors.whiteColor,
-                    //     decoration: InputDecoration(
-                    //       hintText: 'Search',
-                    //       hintStyle: textTheme.titleSmall,
-                    //       prefixIcon: HugeIcon(
-                    //         icon: HugeIcons.strokeRoundedSearch01,
-                    //         color: SolidColors.secondaryGrayColor,
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
