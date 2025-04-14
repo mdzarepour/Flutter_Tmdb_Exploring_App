@@ -35,7 +35,7 @@ class ListViewItem extends StatelessWidget {
               borderRadius: BorderRadius.all(Radius.circular(9)),
               child: SizedBox(
                 width: size.width,
-                height: 160,
+                height: 260,
                 child: CachedNetworkImage(
                   alignment: Alignment.topCenter,
                   fit: BoxFit.cover,

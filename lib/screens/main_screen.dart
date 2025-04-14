@@ -9,6 +9,7 @@ import 'package:movie_app/screens/search_screen.dart';
 import 'package:movie_app/services/movie_service.dart';
 
 class MainScreen extends StatefulWidget {
+  //TODO add refresh indicatore to MainScreen
   const MainScreen({super.key});
 
   @override
@@ -18,13 +19,14 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen> {
   late Future<List<List<Movie>>> allMoviesList;
   int _selectedIndex = 0;
+
   @override
   void initState() {
     super.initState();
     _fetchMovieData();
   }
 
-  _fetchMovieData() async {
+  _fetchMovieData() {
     // fetch all three movie lists --->
     MovieService movieService = MovieService();
     allMoviesList = Future.wait([

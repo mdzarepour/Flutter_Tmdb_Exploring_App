@@ -1,9 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_app/components/widgets/categori_title.dart';
-import 'package:movie_app/components/widgets/connection_error_message.dart';
 import 'package:movie_app/components/widgets/list_view_item.dart';
-import 'package:movie_app/components/widgets/loading.dart';
 import 'package:movie_app/components/widgets/slider_item.dart';
 import 'package:movie_app/models/movie.dart';
 
@@ -22,50 +20,32 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final FocusNode _focusNode = FocusNode();
-  final TextEditingController _searchController = TextEditingController();
-
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void dispose() {
-    _focusNode.dispose();
-    _searchController.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     TextTheme textTheme = Theme.of(context).textTheme;
-    return GestureDetector(
-      onTap: () => _focusNode.unfocus(),
-      child: Scaffold(
-        body: SafeArea(
-          child: SingleChildScrollView(
-            child: Center(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Column(
-                  children: [
-                    SizedBox(height: 20),
-                    CategoriTitle(text: 'Popular Movies'),
-                    SizedBox(height: 20),
-                    _buildCarouselSlider(textTheme, size),
-                    SizedBox(height: 40),
-                    CategoriTitle(text: 'Top Rated Movies'),
-                    SizedBox(height: 20),
-                    _buildCategoryListView(size, widget.ratedMovies),
-                    SizedBox(height: 30),
-                    CategoriTitle(text: 'Upcoming Movies'),
-                    SizedBox(height: 20),
-                    _buildCategoryListView(size, widget.upcomingMovies),
-                    SizedBox(height: 30),
-                  ],
-                ),
+    return Scaffold(
+      body: Center(
+        child: SingleChildScrollView(
+          child: SafeArea(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8),
+              child: Column(
+                children: [
+                  SizedBox(height: 20),
+                  CategoriTitle(text: 'Popular Movies'),
+                  SizedBox(height: 20),
+                  _buildCarouselSlider(textTheme, size),
+                  SizedBox(height: 40),
+                  CategoriTitle(text: 'Top Rated Movies'),
+                  SizedBox(height: 20),
+                  _buildCategoryListView(size, widget.ratedMovies),
+                  SizedBox(height: 30),
+                  CategoriTitle(text: 'Upcoming Movies'),
+                  SizedBox(height: 20),
+                  _buildCategoryListView(size, widget.upcomingMovies),
+                  SizedBox(height: 30),
+                ],
               ),
             ),
           ),
@@ -101,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
   // top rated & upcoming videos ListView --->
   SizedBox _buildCategoryListView(Size size, List<Movie> list) {
     return SizedBox(
-      height: 200,
+      height: 310,
       child: ListView.builder(
         itemCount: list.length,
         scrollDirection: Axis.horizontal,

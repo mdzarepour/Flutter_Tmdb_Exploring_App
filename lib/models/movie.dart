@@ -32,8 +32,7 @@ class Movie {
       popularity: jsonMap['popularity'],
       posterPath: posterImageBaseUrld + jsonMap['poster_path'],
       releaseDate: jsonMap['release_date'],
-      voteAverage: jsonMap[
-          'vote_average'], // Fixed typo here ('woteAverage' -> 'voteAverage')
+      voteAverage: jsonMap['vote_average'],
       id: jsonMap['id'],
     );
   }

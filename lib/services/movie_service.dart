@@ -8,19 +8,19 @@ class MovieService {
     "Authorization": ApiStrings.bearer,
   };
 
-  Future<List<Movie>> getMovieList(
-      {required String url, required String errorMessage}) async {
+  Future<List<Movie>> getMovieList({
+    required String url,
+    required String errorMessage,
+  }) async {
     Response response = await Dio().get(
       url,
-      options: Options(
-        method: ApiStrings.method,
-        headers: headers,
-      ),
+      options: Options(method: ApiStrings.method, headers: headers),
     );
     if (response.statusCode == 200) {
-      List<Movie> movieList = response.data['results']
-          .map<Movie>((e) => Movie.fromJson(e))
-          .toList();
+      List<Movie> movieList =
+          response.data['results']
+              .map<Movie>((e) => Movie.fromJson(e))
+              .toList();
       return movieList;
     } else {
       throw (errorMessage);
@@ -29,11 +29,9 @@ class MovieService {
 
   Future<Movie> getMovieDetails(int movieId) async {
     Response response = await Dio().get(
-        options: Options(
-          headers: headers,
-          method: ApiStrings.method,
-        ),
-        'https://api.themoviedb.org/3/movie/$movieId?language=en-US');
+      options: Options(headers: headers, method: ApiStrings.method),
+      'https://api.themoviedb.org/3/movie/$movieId?language=en-US',
+    );
     if (response.statusCode == 200) {
       Movie movie = Movie.fromJson(response.data);
       return movie;
