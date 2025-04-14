@@ -1,7 +1,7 @@
-# Crypto pricing app
+# Movie Exploring
 
-Crypto is a little flutter app without state management package ,<br>
-just for practice api injection with coincap.com free api
+Movie App is a little flutter app without state management package ,<br>
+just for practice api injection with tmdb.org free api
 <br>
 <br>
 
@@ -46,8 +46,7 @@ flutter pub run
 
 used api :
 
-* website: `CoinCap.io`
-* api url: `https://rest.coincap.io/v3/assets?apiKey=${apiKey}`
+* website: `https://developer.themoviedb.org/docs/getting-started`
 
 <hr>
 
@@ -56,4 +55,6 @@ used package in Crypto :
 * Dio: `dio: ^5.8.0+1`
 * SpinKit: `flutter_spinkit: ^5.2.1`
 * Luncher Icon: `flutter_launcher_icons: ^0.14.3`
+* Cached Network `cached_network_image: ^3.4.1`
+* Carousel Slider `carousel_slider: ^5.0.0`
 
