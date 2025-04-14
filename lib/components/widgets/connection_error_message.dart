@@ -8,21 +8,17 @@ class ConnectionErrorMessage extends StatelessWidget {
   const ConnectionErrorMessage({super.key, required this.message});
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        spacing: 30,
-        children: [
-          SizedBox(height: 20),
-          Icon(
-            HugeIcons.strokeRoundedNoInternet,
-            color: SolidColors.secondaryGrayColor,
-          ),
-          Text(
-            message,
-            style: Theme.of(context).textTheme.headlineSmall,
-          ),
-        ],
-      ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      spacing: 10,
+      children: [
+        SizedBox(height: 40),
+        Icon(
+          HugeIcons.strokeRoundedNoInternet,
+          color: SolidColors.secondaryGrayColor,
+        ),
+        Text(message, style: Theme.of(context).textTheme.headlineSmall),
+      ],
     );
   }
 }

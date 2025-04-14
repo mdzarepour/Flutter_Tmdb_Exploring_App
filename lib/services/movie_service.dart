@@ -14,6 +14,7 @@ class MovieService {
   }) async {
     Response response = await Dio().get(
       url,
+      queryParameters: {'language': 'en-US', 'api_key': ApiStrings.apiKey},
       options: Options(method: ApiStrings.method, headers: headers),
     );
     if (response.statusCode == 200) {

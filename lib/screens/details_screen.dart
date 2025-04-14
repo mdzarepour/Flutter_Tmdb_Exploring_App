@@ -45,17 +45,17 @@ class _DetailsScreenState extends State<DetailsScreen> {
               FutureBuilder(
                 future: movieDetails,
                 builder: (context, snapshot) {
-                  // eror condition =>
+                  // eror condition --->
                   if (snapshot.hasError) {
                     return ConnectionErrorMessage(
                       message: 'Oops please refresh the page',
                     );
-                    // loading condition =>
+                    // loading condition --->
                   } else if (snapshot.connectionState ==
                       ConnectionState.waiting) {
                     return Loading();
                   } else {
-                    // accurate condition =>
+                    // accurate condition --->
                     return SafeArea(
                       child: Center(
                         child: Column(
@@ -78,7 +78,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
     );
   }
 
-  // overview text in main column =>
+  // overview text in main column --->
   Padding _buildOverView(AsyncSnapshot<Movie> snapshot, TextTheme textTheme) {
     return Padding(
       padding: EdgeInsets.fromLTRB(15, 40, 15, 30),
@@ -89,12 +89,12 @@ class _DetailsScreenState extends State<DetailsScreen> {
     );
   }
 
-  // the row contains date,popularity,language =>
+  // the row contains date,popularity,language --->
   Row _buildDetailsRow(AsyncSnapshot<Movie> snapshot, TextTheme textTheme) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        // release date =>
+        // release date --->
         Row(
           spacing: 10,
           children: [
@@ -103,7 +103,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
           ],
         ),
         _buildDivider(),
-        // popularity =>
+        // popularity --->
         Row(
           spacing: 10,
           children: [
@@ -115,7 +115,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
           ],
         ),
         _buildDivider(),
-        // language =>
+        // language --->
         Row(
           spacing: 10,
           children: [
@@ -130,7 +130,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
     );
   }
 
-  // the stack contains backdrop image,rating,poster,title =>
+  // the stack contains backdrop image,rating,poster,title --->
   Stack _buildPosterStack(
     Size size,
     AsyncSnapshot<Movie> snapshot,
@@ -138,9 +138,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
   ) {
     return Stack(
       children: [
-        // all stack container =>
+        // all stack container --->
         SizedBox(width: size.width, height: 350),
-        // backdrop image =>
+        // backdrop image --->
         ClipRRect(
           borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
           child: SizedBox(
@@ -157,7 +157,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
             ),
           ),
         ),
-        // pooster image =>
+        // pooster image --->
         Positioned(
           bottom: 0,
           left: 30,
@@ -173,7 +173,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
             ),
           ),
         ),
-        // rating row =>
+        // rating row --->
         Positioned(
           bottom: 100,
           right: 10,
@@ -200,7 +200,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
             ),
           ),
         ),
-        // movie title =>
+        // movie title --->
         Positioned(
           bottom: 0,
           left: size.width / 2.4,
@@ -220,7 +220,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
     );
   }
 
-  // appbar contains title,backButton =>
+  // appbar contains title,backButton --->
   AppBar _buildAppBar(TextTheme textTheme) {
     return AppBar(
       // beck button =>
@@ -236,7 +236,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
     );
   }
 
-  // the divider used in _buildDetailsRow =>
+  // the divider used in _buildDetailsRow --->
   Container _buildDivider() {
     return Container(
       height: 30,
