@@ -19,7 +19,7 @@ just for practice api injection with coincap.com free api
 <img src="https://github.com/user-attachments/assets/2e00c055-674c-4532-9bd7-ec73f5ddaca6" width="200" alt="" />
 
 
-<img src="" width="200" alt="" />
+<img src="https://github.com/user-attachments/assets/58cbcc25-df2d-4eb6-a7f7-6acb0b230e46" width="200" alt="" />
 
 </p>
 
@@ -52,29 +52,4 @@ used package in Crypto :
 * Dio: `dio: ^5.8.0+1`
 * SpinKit: `flutter_spinkit: ^5.2.1`
 * Luncher Icon: `flutter_launcher_icons: ^0.14.3`
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
