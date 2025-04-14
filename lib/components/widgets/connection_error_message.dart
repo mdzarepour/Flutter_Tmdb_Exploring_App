@@ -9,7 +9,6 @@ class ConnectionErrorMessage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
       spacing: 10,
       children: [
         SizedBox(height: 40),
