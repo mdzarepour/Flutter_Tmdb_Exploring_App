@@ -15,16 +15,9 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  late Future<List<Movie>> trendingMovies;
   final TextEditingController _searchController = TextEditingController();
-  final FocusNode _focusNode = FocusNode();
-
-  @override
-  void dispose() {
-    super.dispose();
-    _searchController.dispose();
-    _focusNode.dispose();
-  }
+  late Future<List<Movie>> _trendingMovies;
+  late List<Movie> trendingMovies;
 
   @override
   void initState() {
@@ -33,13 +26,13 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   _fetchTrendingMovies() async {
-    setState(() {
-      trendingMovies = MovieService().getMovieList(
-        url: ApiStrings.trendingMoviesUrl,
-        errorMessage: 'search screen',
-      );
+    _trendingMovies = MovieService().getMovieList(
+      url: ApiStrings.trendingMoviesUrl,
+      errorMessage: 'search screen',
+    );
+    setState(() async {
+      trendingMovies = await _trendingMovies;
     });
-    await trendingMovies;
   }
 
   @override
@@ -53,11 +46,11 @@ class _SearchScreenState extends State<SearchScreen> {
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 20),
             child: FutureBuilder(
-              future: trendingMovies,
+              future: _trendingMovies,
               builder: (context, snapshot) {
                 // accurate condition --->
                 if (snapshot.hasData) {
-                  return _futureHasData(size, textTheme, snapshot);
+                  return _futureHasData(size, textTheme, trendingMovies);
                   // error condition --->
                 } else if (snapshot.hasError) {
                   return _futureHasError(textTheme);
@@ -87,11 +80,7 @@ class _SearchScreenState extends State<SearchScreen> {
     );
   }
 
-  Column _futureHasData(
-    Size size,
-    TextTheme textTheme,
-    AsyncSnapshot<List<Movie>> snapshot,
-  ) {
+  Column _futureHasData(Size size, TextTheme textTheme, List<Movie> movieList) {
     return Column(
       children: [
         SizedBox(height: 40),
@@ -101,7 +90,7 @@ class _SearchScreenState extends State<SearchScreen> {
           height: size.height - 300,
           width: size.width,
           child: GridView.builder(
-            itemCount: snapshot.data!.length,
+            itemCount: trendingMovies.length,
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               crossAxisSpacing: 12,
@@ -109,7 +98,7 @@ class _SearchScreenState extends State<SearchScreen> {
               mainAxisExtent: 300,
             ),
             itemBuilder: (context, index) {
-              return GridViewItem(index: index, snapshot: snapshot);
+              return GridViewItem(index: index, movieList: trendingMovies);
             },
           ),
         ),
@@ -126,8 +115,6 @@ class _SearchScreenState extends State<SearchScreen> {
         borderRadius: BorderRadius.all(Radius.circular(12)),
       ),
       child: TextField(
-        controller: _searchController,
-        focusNode: _focusNode,
         style: textTheme.titleSmall,
         textAlignVertical: TextAlignVertical.center,
         cursorColor: SolidColors.whiteColor,
@@ -139,7 +126,23 @@ class _SearchScreenState extends State<SearchScreen> {
             color: SolidColors.secondaryGrayColor,
           ),
         ),
+        controller: _searchController,
+        onChanged: (value) => _searchMovieO(_searchController.text),
       ),
     );
+  }
+
+  _searchMovieO(String input) async {
+    final searchList = await _trendingMovies;
+    setState(() {
+      trendingMovies =
+          searchList
+              .where(
+                (element) => element.originalTitle.toLowerCase().contains(
+                  input.toLowerCase(),
+                ),
+              )
+              .toList();
+    });
   }
 }
