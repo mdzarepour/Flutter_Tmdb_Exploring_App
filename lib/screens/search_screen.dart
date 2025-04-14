@@ -18,6 +18,7 @@ class _SearchScreenState extends State<SearchScreen> {
   late Future<List<Movie>> trendingMovies;
   final TextEditingController _searchController = TextEditingController();
   final FocusNode _focusNode = FocusNode();
+
   @override
   void dispose() {
     super.dispose();
@@ -31,11 +32,14 @@ class _SearchScreenState extends State<SearchScreen> {
     _fetchTrendingMovies();
   }
 
-  _fetchTrendingMovies() {
-    trendingMovies = MovieService().getMovieList(
-      url: ApiStrings.trendingMoviesUrl,
-      errorMessage: 'search screen',
-    );
+  _fetchTrendingMovies() async {
+    setState(() {
+      trendingMovies = MovieService().getMovieList(
+        url: ApiStrings.trendingMoviesUrl,
+        errorMessage: 'search screen',
+      );
+    });
+    await trendingMovies;
   }
 
   @override
@@ -43,7 +47,8 @@ class _SearchScreenState extends State<SearchScreen> {
     TextTheme textTheme = Theme.of(context).textTheme;
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      body: Center(
+      body: RefreshIndicator(
+        onRefresh: () => _fetchTrendingMovies(),
         child: SafeArea(
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 20),

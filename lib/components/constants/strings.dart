@@ -12,5 +12,5 @@ class ApiStrings {
   static const String upcomingVideosUrl =
       'https://api.themoviedb.org/3/movie/upcoming?language=en-US&page=1';
   static const String trendingMoviesUrl =
-      'https://api.themoviedb.org/3/trending/movie/week';
+      'https://api.themoviedb.org/3/trending/movie/day';
 }
