@@ -12,6 +12,7 @@ class GridViewItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // navigate to DetailsScreen --->
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -23,6 +24,7 @@ class GridViewItem extends StatelessWidget {
       },
       child: ClipRRect(
         borderRadius: BorderRadius.all(Radius.circular(12)),
+        // movie image --->
         child: CachedNetworkImage(
           fit: BoxFit.cover,
           imageUrl: movieList[index].posterPath,

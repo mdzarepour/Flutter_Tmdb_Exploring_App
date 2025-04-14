@@ -15,7 +15,6 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  final TextEditingController _searchController = TextEditingController();
   late Future<List<Movie>> _trendingMovies;
   late List<Movie> trendingMovies;
 
@@ -30,9 +29,7 @@ class _SearchScreenState extends State<SearchScreen> {
       url: ApiStrings.trendingMoviesUrl,
       errorMessage: 'search screen',
     );
-    setState(() async {
-      trendingMovies = await _trendingMovies;
-    });
+    await _trendingMovies;
   }
 
   @override
@@ -40,25 +37,28 @@ class _SearchScreenState extends State<SearchScreen> {
     TextTheme textTheme = Theme.of(context).textTheme;
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      body: RefreshIndicator(
-        onRefresh: () => _fetchTrendingMovies(),
-        child: SafeArea(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: FutureBuilder(
-              future: _trendingMovies,
-              builder: (context, snapshot) {
-                // accurate condition --->
-                if (snapshot.hasData) {
-                  return _futureHasData(size, textTheme, trendingMovies);
-                  // error condition --->
-                } else if (snapshot.hasError) {
-                  return _futureHasError(textTheme);
-                  // waiting condition --->
-                } else {
-                  return Loading();
-                }
-              },
+      resizeToAvoidBottomInset: false,
+      body: SingleChildScrollView(
+        child: RefreshIndicator(
+          onRefresh: () => _fetchTrendingMovies(),
+          child: SafeArea(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: FutureBuilder(
+                future: _trendingMovies,
+                builder: (context, snapshot) {
+                  // accurate condition --->
+                  if (snapshot.hasData) {
+                    return _futureHasData(size, textTheme, trendingMovies);
+                    // error condition --->
+                  } else if (snapshot.hasError) {
+                    return _futureHasError(textTheme);
+                    // waiting condition --->
+                  } else {
+                    return Loading();
+                  }
+                },
+              ),
             ),
           ),
         ),
@@ -66,6 +66,7 @@ class _SearchScreenState extends State<SearchScreen> {
     );
   }
 
+  // error condition --->
   Column _futureHasError(TextTheme textTheme) {
     return Column(
       spacing: 30,
@@ -80,12 +81,15 @@ class _SearchScreenState extends State<SearchScreen> {
     );
   }
 
+  // accurate condition widget --->
   Column _futureHasData(Size size, TextTheme textTheme, List<Movie> movieList) {
     return Column(
       children: [
         SizedBox(height: 40),
+        // search textfield --->
         _buildSearchTextfield(size, textTheme),
         SizedBox(height: 20),
+        // movies gridView --->
         SizedBox(
           height: size.height - 300,
           width: size.width,
@@ -106,6 +110,7 @@ class _SearchScreenState extends State<SearchScreen> {
     );
   }
 
+  // used in futureHasData --->
   Container _buildSearchTextfield(Size size, TextTheme textTheme) {
     return Container(
       width: size.width / 1.3,
@@ -120,18 +125,15 @@ class _SearchScreenState extends State<SearchScreen> {
         cursorColor: SolidColors.whiteColor,
         decoration: InputDecoration(
           hintText: 'Search',
-          hintStyle: textTheme.titleSmall,
-          prefixIcon: HugeIcon(
-            icon: HugeIcons.strokeRoundedSearch01,
-            color: SolidColors.secondaryGrayColor,
-          ),
+          prefixIcon: Icon(HugeIcons.strokeRoundedSearch01),
         ),
-        controller: _searchController,
-        onChanged: (value) => _searchMovieO(_searchController.text),
+        // styles end --->
+        onChanged: (value) => _searchMovieO(value),
       ),
     );
   }
 
+  //used in searchTextfield --->
   _searchMovieO(String input) async {
     final searchList = await _trendingMovies;
     setState(() {

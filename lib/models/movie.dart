@@ -1,14 +1,13 @@
 class Movie {
-  late String originalLanguage;
-  late String originalTitle;
-  late String overview;
-
-  late String releaseDate;
-  late String posterPath;
-  late String backDropPath;
-  late double popularity;
-  late double voteAverage;
-  late int id;
+  final String originalLanguage;
+  final String originalTitle;
+  final String overview;
+  final String releaseDate;
+  final String posterPath;
+  final String backDropPath;
+  final double popularity;
+  final double voteAverage;
+  final int id;
   Movie({
     required this.backDropPath,
     required this.originalLanguage,

@@ -31,6 +31,7 @@ class SliderItem extends StatelessWidget {
         child: SizedBox(
           height: double.infinity,
           width: size.width / 1.90,
+          // movie image --->
           child: CachedNetworkImage(
             fit: BoxFit.cover,
             imageUrl: list[index].posterPath,

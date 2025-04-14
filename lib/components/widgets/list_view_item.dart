@@ -15,7 +15,7 @@ class ListViewItem extends StatelessWidget {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return GestureDetector(
-      //send movie id and navigate to Detail screen =>
+      //send movie id and navigate to Detail screen --->
       onTap: () {
         Navigator.push(
           context,
@@ -24,7 +24,7 @@ class ListViewItem extends StatelessWidget {
           ),
         );
       },
-      // popular and upcoming movies list item =>
+      // popular and upcoming movies list item --->
       child: SizedBox(
         width: size.width / 2.65,
         height: size.height,
@@ -49,7 +49,7 @@ class ListViewItem extends StatelessWidget {
                 ),
               ),
             ),
-            // movie name =>
+            // movie name --->
             Text(
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.titleMedium,

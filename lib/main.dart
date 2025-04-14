@@ -22,13 +22,31 @@ class MovieApp extends StatelessWidget {
         appBarTheme: _getAppbarTheme(),
         textTheme: _getTextTheme(),
         inputDecorationTheme: _getTextFieldTheme(),
-        bottomNavigationBarTheme: BottomNavigationBarThemeData(
-          selectedItemColor: SolidColors.redColor,
-          unselectedItemColor: SolidColors.whiteColor,
-          backgroundColor: SolidColors.backGroundColor,
-        ),
+        bottomNavigationBarTheme: _getBottumNavigationTheme(),
+        outlinedButtonTheme: _getOutlinedButtonTheme(),
       ),
       home: MainScreen(),
+    );
+  }
+
+  OutlinedButtonThemeData _getOutlinedButtonTheme() {
+    return OutlinedButtonThemeData(
+      style: OutlinedButton.styleFrom(
+        iconColor: SolidColors.whiteColor,
+        iconSize: 27,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(12)),
+        ),
+        fixedSize: Size(200, 50),
+      ),
+    );
+  }
+
+  BottomNavigationBarThemeData _getBottumNavigationTheme() {
+    return BottomNavigationBarThemeData(
+      selectedItemColor: SolidColors.redColor,
+      unselectedItemColor: SolidColors.whiteColor,
+      backgroundColor: SolidColors.backGroundColor,
     );
   }
 
@@ -39,6 +57,13 @@ class MovieApp extends StatelessWidget {
     return InputDecorationTheme(
       contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
       border: InputBorder.none,
+      prefixIconColor: SolidColors.secondaryGrayColor,
+      hintStyle: TextStyle(
+        color: SolidColors.secondaryGrayColor,
+        fontSize: 16,
+        fontFamily: 'Poppins_Medium',
+        fontWeight: FontWeight.w400,
+      ),
     );
   }
 

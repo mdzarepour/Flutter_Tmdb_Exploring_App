@@ -39,39 +39,33 @@ class _DetailsScreenState extends State<DetailsScreen> {
         child: RefreshIndicator(
           color: SolidColors.redColor,
           onRefresh: () async => await _getMovieDetails(),
-          child: ListView(
-            physics: const AlwaysScrollableScrollPhysics(),
-            children: [
-              FutureBuilder(
-                future: movieDetails,
-                builder: (context, snapshot) {
-                  // eror condition --->
-                  if (snapshot.hasError) {
-                    return ConnectionErrorMessage(
-                      message: 'Oops please refresh the page',
-                    );
-                    // loading condition --->
-                  } else if (snapshot.connectionState ==
-                      ConnectionState.waiting) {
-                    return Loading();
-                  } else {
-                    // accurate condition --->
-                    return SafeArea(
-                      child: Center(
-                        child: Column(
-                          children: [
-                            _buildPosterStack(size, snapshot, textTheme),
-                            SizedBox(height: 30),
-                            _buildDetailsRow(snapshot, textTheme),
-                            _buildOverView(snapshot, textTheme),
-                          ],
-                        ),
-                      ),
-                    );
-                  }
-                },
-              ),
-            ],
+          child: FutureBuilder(
+            future: movieDetails,
+            builder: (context, snapshot) {
+              // eror condition --->
+              if (snapshot.hasError) {
+                return ConnectionErrorMessage(
+                  message: 'Oops please refresh the page',
+                );
+                // loading condition --->
+              } else if (snapshot.connectionState == ConnectionState.waiting) {
+                return Loading();
+              } else {
+                // accurate condition --->
+                return SafeArea(
+                  child: Center(
+                    child: Column(
+                      children: [
+                        _buildPosterStack(size, snapshot, textTheme),
+                        SizedBox(height: 30),
+                        _buildDetailsRow(snapshot, textTheme),
+                        _buildOverView(snapshot, textTheme),
+                      ],
+                    ),
+                  ),
+                );
+              }
+            },
           ),
         ),
       ),

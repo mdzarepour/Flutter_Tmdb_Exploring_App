@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:movie_app/components/constants/colors.dart';
 import 'package:movie_app/components/constants/strings.dart';
 import 'package:movie_app/components/widgets/loading.dart';
 import 'package:movie_app/models/movie.dart';
@@ -9,9 +8,7 @@ import 'package:movie_app/screens/search_screen.dart';
 import 'package:movie_app/services/movie_service.dart';
 
 class MainScreen extends StatefulWidget {
-  //TODO add refresh indicatore to MainScreen
   const MainScreen({super.key});
-
   @override
   State<StatefulWidget> createState() => _MainScreenState();
 }
@@ -26,23 +23,25 @@ class _MainScreenState extends State<MainScreen> {
     _fetchMovieData();
   }
 
-  _fetchMovieData() {
+  Future<void> _fetchMovieData() async {
     // fetch all three movie lists --->
-    MovieService movieService = MovieService();
-    allMoviesList = Future.wait([
-      movieService.getMovieList(
-        url: ApiStrings.popularVideosUrl,
-        errorMessage: 'error while fetching popular movies',
-      ),
-      movieService.getMovieList(
-        url: ApiStrings.ratedVideosUrl,
-        errorMessage: 'error while fetching top rated movies',
-      ),
-      movieService.getMovieList(
-        url: ApiStrings.upcomingVideosUrl,
-        errorMessage: 'error while fetching upcoming movies',
-      ),
-    ]);
+    setState(() {
+      MovieService movieService = MovieService();
+      allMoviesList = Future.wait([
+        movieService.getMovieList(
+          url: ApiStrings.popularVideosUrl,
+          errorMessage: 'error while fetching popular movies',
+        ),
+        movieService.getMovieList(
+          url: ApiStrings.ratedVideosUrl,
+          errorMessage: 'error while fetching top rated movies',
+        ),
+        movieService.getMovieList(
+          url: ApiStrings.upcomingVideosUrl,
+          errorMessage: 'error while fetching upcoming movies',
+        ),
+      ]);
+    });
   }
 
   @override
@@ -54,8 +53,8 @@ class _MainScreenState extends State<MainScreen> {
           child: FutureBuilder(
             future: allMoviesList,
             builder: (context, snapshot) {
+              // accurate condition --->
               if (snapshot.hasData) {
-                // accurate condition --->
                 return IndexedStack(
                   index: _selectedIndex,
                   children: [
@@ -71,27 +70,15 @@ class _MainScreenState extends State<MainScreen> {
               } else if (snapshot.hasError) {
                 return OutlinedButton.icon(
                   onPressed: () => _fetchMovieData(),
-                  label: Text('Oops Try Again'),
-                  icon: HugeIcon(
-                    icon: HugeIcons.strokeRoundedRefresh,
-                    color: SolidColors.secondaryGrayColor,
+                  label: Text(
+                    style: Theme.of(context).textTheme.titleMedium,
+                    'Oops Try Again',
                   ),
+                  icon: Icon(HugeIcons.strokeRoundedPenConnectWifi),
                 );
               } else {
                 // waiting condition --->
-                return Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    spacing: 20,
-                    children: [
-                      Text(
-                        'Movie App',
-                        style: Theme.of(context).textTheme.titleLarge,
-                      ),
-                      Loading(),
-                    ],
-                  ),
-                );
+                return Center(child: Loading());
               }
             },
           ),
@@ -101,6 +88,7 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 
+  // bottomNavigation widget --->
   BottomNavigationBar _buildBottomNavigation() {
     return BottomNavigationBar(
       currentIndex: _selectedIndex,
@@ -120,6 +108,7 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 
+  // appBar widget --->
   AppBar _buildAppBar() {
     return AppBar(title: Text('Movie App'));
   }

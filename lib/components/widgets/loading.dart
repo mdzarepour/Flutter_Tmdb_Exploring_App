@@ -7,9 +7,6 @@ class Loading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SpinKitThreeBounce(
-      color: SolidColors.secondaryGrayColor,
-      size: 19,
-    );
+    return SpinKitFadingFour(color: SolidColors.secondaryGrayColor, size: 25);
   }
 }

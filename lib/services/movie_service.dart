@@ -7,7 +7,7 @@ class MovieService {
     "accept": ApiStrings.accept,
     "Authorization": ApiStrings.bearer,
   };
-
+  // fetch popular,topRated,upcoming,trend movies --->
   Future<List<Movie>> getMovieList({
     required String url,
     required String errorMessage,
@@ -28,6 +28,7 @@ class MovieService {
     }
   }
 
+  // fetch movie details using movieId --->
   Future<Movie> getMovieDetails(int movieId) async {
     Response response = await Dio().get(
       options: Options(headers: headers, method: ApiStrings.method),
