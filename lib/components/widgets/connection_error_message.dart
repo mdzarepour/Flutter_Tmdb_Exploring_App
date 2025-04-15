@@ -11,8 +11,8 @@ class ConnectionErrorMessage extends StatelessWidget {
     return Column(
       spacing: 10,
       children: [
-        SizedBox(height: 40),
-        Icon(
+        const SizedBox(height: 40),
+        const Icon(
           HugeIcons.strokeRoundedNoInternet,
           color: SolidColors.secondaryGrayColor,
         ),

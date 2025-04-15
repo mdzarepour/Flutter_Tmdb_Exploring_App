@@ -63,7 +63,7 @@ class _MainScreenState extends State<MainScreen> {
                       ratedMovies: snapshot.data![1],
                       upcomingMovies: snapshot.data![2],
                     ),
-                    SearchScreen(),
+                    const SearchScreen(),
                   ],
                 );
                 // error condition --->
@@ -74,11 +74,11 @@ class _MainScreenState extends State<MainScreen> {
                     style: Theme.of(context).textTheme.titleMedium,
                     'Oops Try Again',
                   ),
-                  icon: Icon(HugeIcons.strokeRoundedPenConnectWifi),
+                  icon: const Icon(HugeIcons.strokeRoundedPenConnectWifi),
                 );
               } else {
                 // waiting condition --->
-                return Center(child: Loading());
+                return const Center(child: Loading());
               }
             },
           ),
@@ -95,7 +95,7 @@ class _MainScreenState extends State<MainScreen> {
       onTap: (index) {
         setState(() => _selectedIndex = index);
       },
-      items: [
+      items: const [
         BottomNavigationBarItem(
           label: 'Home',
           icon: Icon(HugeIcons.strokeRoundedHome01),
@@ -110,6 +110,6 @@ class _MainScreenState extends State<MainScreen> {
 
   // appBar widget --->
   AppBar _buildAppBar() {
-    return AppBar(title: Text('Movie App'));
+    return AppBar(title: const Text('Movie App'));
   }
 }

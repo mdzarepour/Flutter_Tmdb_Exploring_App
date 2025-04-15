@@ -32,7 +32,7 @@ class ListViewItem extends StatelessWidget {
           spacing: 10,
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(9)),
+              borderRadius: const BorderRadius.all(Radius.circular(9)),
               child: SizedBox(
                 width: size.width,
                 height: 260,
@@ -41,11 +41,11 @@ class ListViewItem extends StatelessWidget {
                   fit: BoxFit.cover,
                   imageUrl: list[index].posterPath,
                   errorWidget:
-                      (context, url, error) => Icon(
+                      (context, url, error) => const Icon(
                         HugeIcons.strokeRoundedImage02,
                         color: SolidColors.secondaryGrayColor,
                       ),
-                  placeholder: (context, url) => Loading(),
+                  placeholder: (context, url) => const Loading(),
                 ),
               ),
             ),

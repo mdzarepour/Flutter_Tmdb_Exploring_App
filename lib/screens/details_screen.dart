@@ -44,12 +44,12 @@ class _DetailsScreenState extends State<DetailsScreen> {
             builder: (context, snapshot) {
               // eror condition --->
               if (snapshot.hasError) {
-                return ConnectionErrorMessage(
+                return const ConnectionErrorMessage(
                   message: 'Oops please refresh the page',
                 );
                 // loading condition --->
               } else if (snapshot.connectionState == ConnectionState.waiting) {
-                return Loading();
+                return const Loading();
               } else {
                 // accurate condition --->
                 return SafeArea(
@@ -57,7 +57,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
                     child: Column(
                       children: [
                         _buildPosterStack(size, snapshot, textTheme),
-                        SizedBox(height: 30),
+                        const SizedBox(height: 30),
                         _buildDetailsRow(snapshot, textTheme),
                         _buildOverView(snapshot, textTheme),
                       ],
@@ -75,7 +75,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
   // overview text in main column --->
   Padding _buildOverView(AsyncSnapshot<Movie> snapshot, TextTheme textTheme) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(15, 40, 15, 30),
+      padding: const EdgeInsets.fromLTRB(15, 40, 15, 30),
       child: Text(
         snapshot.data!.overview,
         style: textTheme.titleMedium!.copyWith(height: 1.9),
@@ -92,7 +92,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
         Row(
           spacing: 10,
           children: [
-            Icon(HugeIcons.strokeRoundedCalendar03),
+            const Icon(HugeIcons.strokeRoundedCalendar03),
             Text(snapshot.data!.releaseDate, style: textTheme.headlineSmall),
           ],
         ),
@@ -101,7 +101,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
         Row(
           spacing: 10,
           children: [
-            Icon(HugeIcons.strokeRoundedTicket01),
+            const Icon(HugeIcons.strokeRoundedTicket01),
             Text(
               snapshot.data!.popularity.toString().substring(0, 6),
               style: textTheme.headlineSmall,
@@ -113,7 +113,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
         Row(
           spacing: 10,
           children: [
-            Icon(HugeIcons.strokeRoundedLanguageCircle),
+            const Icon(HugeIcons.strokeRoundedLanguageCircle),
             Text(
               snapshot.data!.originalLanguage,
               style: textTheme.headlineSmall,
@@ -136,7 +136,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
         SizedBox(width: size.width, height: 350),
         // backdrop image --->
         ClipRRect(
-          borderRadius: BorderRadius.vertical(bottom: Radius.circular(15)),
+          borderRadius: const BorderRadius.vertical(
+            bottom: Radius.circular(15),
+          ),
           child: SizedBox(
             width: size.width,
             height: 265,
@@ -146,8 +148,8 @@ class _DetailsScreenState extends State<DetailsScreen> {
               imageUrl: snapshot.data!.backDropPath,
               errorWidget:
                   (context, url, error) =>
-                      ConnectionErrorMessage(message: 'image not found'),
-              placeholder: (context, url) => Loading(),
+                      const ConnectionErrorMessage(message: 'image not found'),
+              placeholder: (context, url) => const Loading(),
             ),
           ),
         ),
@@ -156,7 +158,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
           bottom: 0,
           left: 30,
           child: ClipRRect(
-            borderRadius: BorderRadius.all(Radius.circular(15)),
+            borderRadius: const BorderRadius.all(Radius.circular(15)),
             child: SizedBox(
               width: size.width / 3.3,
               height: 160,
@@ -172,7 +174,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
           bottom: 100,
           right: 10,
           child: Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               gradient: GradientColors.ratingGradientColor,
               borderRadius: BorderRadius.all(Radius.circular(20)),
             ),
@@ -181,7 +183,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Icon(
+                const Icon(
                   Icons.star_outlined,
                   size: 25,
                   color: SolidColors.yellowColor,
@@ -220,7 +222,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
       // beck button =>
       leading: InkWell(
         onTap: () => Navigator.pop(context),
-        child: Icon(
+        child: const Icon(
           size: 30,
           HugeIcons.strokeRoundedArrowLeft01,
           color: SolidColors.whiteColor,

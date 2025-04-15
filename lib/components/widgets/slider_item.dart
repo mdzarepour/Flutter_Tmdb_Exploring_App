@@ -27,7 +27,7 @@ class SliderItem extends StatelessWidget {
             ),
           ),
       child: ClipRRect(
-        borderRadius: BorderRadius.all(Radius.circular(20)),
+        borderRadius: const BorderRadius.all(Radius.circular(20)),
         child: SizedBox(
           height: double.infinity,
           width: size.width / 1.90,
@@ -36,11 +36,11 @@ class SliderItem extends StatelessWidget {
             fit: BoxFit.cover,
             imageUrl: list[index].posterPath,
             errorWidget:
-                (context, url, error) => Icon(
+                (context, url, error) => const Icon(
                   HugeIcons.strokeRoundedImage02,
                   color: SolidColors.secondaryGrayColor,
                 ),
-            placeholder: (context, url) => Loading(),
+            placeholder: (context, url) => const Loading(),
           ),
         ),
       ),

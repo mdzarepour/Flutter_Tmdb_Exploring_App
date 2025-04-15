@@ -3,7 +3,7 @@ import 'package:movie_app/components/constants/colors.dart';
 import 'package:movie_app/screens/main_screen.dart';
 
 void main(List<String> args) {
-  runApp(MovieApp());
+  runApp(const MovieApp());
 }
 
 class MovieApp extends StatelessWidget {
@@ -25,7 +25,7 @@ class MovieApp extends StatelessWidget {
         bottomNavigationBarTheme: _getBottumNavigationTheme(),
         outlinedButtonTheme: _getOutlinedButtonTheme(),
       ),
-      home: MainScreen(),
+      home: const MainScreen(),
     );
   }
 
@@ -34,16 +34,16 @@ class MovieApp extends StatelessWidget {
       style: OutlinedButton.styleFrom(
         iconColor: SolidColors.whiteColor,
         iconSize: 27,
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(12)),
         ),
-        fixedSize: Size(200, 50),
+        fixedSize: const Size(200, 50),
       ),
     );
   }
 
   BottomNavigationBarThemeData _getBottumNavigationTheme() {
-    return BottomNavigationBarThemeData(
+    return const BottomNavigationBarThemeData(
       selectedItemColor: SolidColors.redColor,
       unselectedItemColor: SolidColors.whiteColor,
       backgroundColor: SolidColors.backGroundColor,
@@ -51,10 +51,10 @@ class MovieApp extends StatelessWidget {
   }
 
   IconThemeData _getIconTheme() =>
-      IconThemeData(color: SolidColors.secondaryGrayColor, size: 30);
+      const IconThemeData(color: SolidColors.secondaryGrayColor, size: 30);
 
   InputDecorationTheme _getTextFieldTheme() {
-    return InputDecorationTheme(
+    return const InputDecorationTheme(
       contentPadding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
       border: InputBorder.none,
       prefixIconColor: SolidColors.secondaryGrayColor,
@@ -68,7 +68,7 @@ class MovieApp extends StatelessWidget {
   }
 
   AppBarTheme _getAppbarTheme() {
-    return AppBarTheme(
+    return const AppBarTheme(
       scrolledUnderElevation: 0,
       centerTitle: true,
       backgroundColor: SolidColors.backGroundColor,
@@ -83,7 +83,7 @@ class MovieApp extends StatelessWidget {
   }
 
   TextTheme _getTextTheme() {
-    return TextTheme(
+    return const TextTheme(
       bodyMedium: TextStyle(color: Colors.white),
       // header bold title theme --->
       titleLarge: TextStyle(

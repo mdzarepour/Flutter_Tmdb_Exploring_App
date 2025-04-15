@@ -25,11 +25,17 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   _fetchTrendingMovies() async {
+    // fetch list then initialize _trendingMovies --->
     _trendingMovies = MovieService().getMovieList(
       url: ApiStrings.trendingMoviesUrl,
       errorMessage: 'search screen',
     );
-    await _trendingMovies;
+    // wait _trendingMovies then set value --->
+    await _trendingMovies.then((value) {
+      setState(() async {
+        trendingMovies = value;
+      });
+    });
   }
 
   @override
@@ -43,7 +49,7 @@ class _SearchScreenState extends State<SearchScreen> {
           onRefresh: () => _fetchTrendingMovies(),
           child: SafeArea(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               child: FutureBuilder(
                 future: _trendingMovies,
                 builder: (context, snapshot) {
@@ -55,7 +61,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     return _futureHasError(textTheme);
                     // waiting condition --->
                   } else {
-                    return Loading();
+                    return const Loading();
                   }
                 },
               ),
@@ -75,7 +81,7 @@ class _SearchScreenState extends State<SearchScreen> {
         Text('Oop Connection problem!', style: textTheme.titleLarge),
         OutlinedButton(
           onPressed: () => _fetchTrendingMovies(),
-          child: Text('Try Again'),
+          child: const Text('Try Again'),
         ),
       ],
     );
@@ -85,17 +91,17 @@ class _SearchScreenState extends State<SearchScreen> {
   Column _futureHasData(Size size, TextTheme textTheme, List<Movie> movieList) {
     return Column(
       children: [
-        SizedBox(height: 40),
+        const SizedBox(height: 40),
         // search textfield --->
         _buildSearchTextfield(size, textTheme),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         // movies gridView --->
         SizedBox(
           height: size.height - 300,
           width: size.width,
           child: GridView.builder(
             itemCount: trendingMovies.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: 2,
               crossAxisSpacing: 12,
               mainAxisSpacing: 12,
@@ -115,7 +121,7 @@ class _SearchScreenState extends State<SearchScreen> {
     return Container(
       width: size.width / 1.3,
       height: size.height / 18.5,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: SolidColors.primaryGrayColor,
         borderRadius: BorderRadius.all(Radius.circular(12)),
       ),
@@ -123,18 +129,18 @@ class _SearchScreenState extends State<SearchScreen> {
         style: textTheme.titleSmall,
         textAlignVertical: TextAlignVertical.center,
         cursorColor: SolidColors.whiteColor,
-        decoration: InputDecoration(
+        decoration: const InputDecoration(
           hintText: 'Search',
           prefixIcon: Icon(HugeIcons.strokeRoundedSearch01),
         ),
         // styles end --->
-        onChanged: (value) => _searchMovieO(value),
+        onChanged: (value) => _searchMovie(value),
       ),
     );
   }
 
   //used in searchTextfield --->
-  _searchMovieO(String input) async {
+  _searchMovie(String input) async {
     final searchList = await _trendingMovies;
     setState(() {
       trendingMovies =

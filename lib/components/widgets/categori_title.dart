@@ -7,15 +7,10 @@ class CategoriTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(left: 15),
+      padding: const EdgeInsets.only(left: 15),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Text(
-            style: Theme.of(context).textTheme.titleLarge,
-            text,
-          ),
-        ],
+        children: [Text(style: Theme.of(context).textTheme.titleLarge, text)],
       ),
     );
   }

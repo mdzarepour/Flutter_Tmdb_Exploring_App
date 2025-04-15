@@ -23,15 +23,15 @@ class GridViewItem extends StatelessWidget {
         );
       },
       child: ClipRRect(
-        borderRadius: BorderRadius.all(Radius.circular(12)),
+        borderRadius: const BorderRadius.all(Radius.circular(12)),
         // movie image --->
         child: CachedNetworkImage(
           fit: BoxFit.cover,
           imageUrl: movieList[index].posterPath,
-          placeholder: (context, url) => Loading(),
+          placeholder: (context, url) => const Loading(),
           errorWidget:
               (context, url, error) =>
-                  Icon(size: 40, HugeIcons.strokeRoundedImage01),
+                  const Icon(size: 40, HugeIcons.strokeRoundedImage01),
         ),
       ),
     );
