@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:movie_app/core/constants/strings.dart';
 import 'package:movie_app/models/movie.dart';
+// TODO add try catch to service
 
 class MovieService {
   Map<String, String> headers = {
