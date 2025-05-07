@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:movie_app/components/widgets/loading.dart';
+import 'package:movie_app/utils/widgets/loading.dart';
 import 'package:movie_app/models/movie.dart';
-import 'package:movie_app/screens/details_screen.dart';
+import 'package:movie_app/view/details/details_view.dart';
 
 class GridViewItem extends StatelessWidget {
   const GridViewItem({super.key, required this.movieList, required this.index});
@@ -18,7 +18,7 @@ class GridViewItem extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => DetailsScreen(movieId: movieList[index].id),
+            builder: (context) => DetailsView(movieId: movieList[index].id),
           ),
         );
       },

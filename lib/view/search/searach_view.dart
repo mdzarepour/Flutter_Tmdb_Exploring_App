@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:movie_app/components/constants/colors.dart';
-import 'package:movie_app/components/constants/strings.dart';
-import 'package:movie_app/components/widgets/grid_view_item.dart';
-import 'package:movie_app/components/widgets/loading.dart';
+import 'package:movie_app/core/constants/colors.dart';
+import 'package:movie_app/core/constants/strings.dart';
+import 'package:movie_app/core/theme/theme.dart';
 import 'package:movie_app/models/movie.dart';
 import 'package:movie_app/services/movie_service.dart';
+import 'package:movie_app/utils/widgets/loading.dart';
+import 'package:movie_app/view/search/components/grid_view_item.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});
@@ -15,7 +16,7 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  late Future<List<Movie>> _trendingMovies;
+  late Future<List<Movie>> _futureTrendingMovies;
   late List<Movie> trendingMovies;
 
   @override
@@ -26,12 +27,12 @@ class _SearchScreenState extends State<SearchScreen> {
 
   _fetchTrendingMovies() async {
     // fetch list then initialize _trendingMovies --->
-    _trendingMovies = MovieService().getMovieList(
+    _futureTrendingMovies = MovieService().getMovieList(
       url: ApiStrings.trendingMoviesUrl,
       errorMessage: 'search screen',
     );
     // wait _trendingMovies then set value --->
-    await _trendingMovies.then((value) {
+    await _futureTrendingMovies.then((value) {
       setState(() async {
         trendingMovies = value;
       });
@@ -51,7 +52,7 @@ class _SearchScreenState extends State<SearchScreen> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: FutureBuilder(
-                future: _trendingMovies,
+                future: _futureTrendingMovies,
                 builder: (context, snapshot) {
                   // accurate condition --->
                   if (snapshot.hasData) {
@@ -75,13 +76,13 @@ class _SearchScreenState extends State<SearchScreen> {
   // error condition --->
   Column _futureHasError(TextTheme textTheme) {
     return Column(
-      spacing: 30,
-      mainAxisAlignment: MainAxisAlignment.center,
+      spacing: 40,
       children: [
-        Text('Oop Connection problem!', style: textTheme.titleLarge),
+        const Text('Oop Connection problem!', style: AppTheme.titleLarge),
         OutlinedButton(
+          style: AppTheme.outlinedButtonTheme,
           onPressed: () => _fetchTrendingMovies(),
-          child: const Text('Try Again'),
+          child: const Text(style: AppTheme.bodyMedium, 'Try Again'),
         ),
       ],
     );
@@ -91,13 +92,13 @@ class _SearchScreenState extends State<SearchScreen> {
   Column _futureHasData(Size size, TextTheme textTheme, List<Movie> movieList) {
     return Column(
       children: [
-        const SizedBox(height: 40),
+        const SizedBox(height: 15),
         // search textfield --->
         _buildSearchTextfield(size, textTheme),
         const SizedBox(height: 20),
         // movies gridView --->
         SizedBox(
-          height: size.height - 300,
+          height: size.height,
           width: size.width,
           child: GridView.builder(
             itemCount: trendingMovies.length,
@@ -122,13 +123,13 @@ class _SearchScreenState extends State<SearchScreen> {
       width: size.width / 1.3,
       height: size.height / 18.5,
       decoration: const BoxDecoration(
-        color: SolidColors.primaryGrayColor,
+        color: SolidColors.materialFirstGrey,
         borderRadius: BorderRadius.all(Radius.circular(12)),
       ),
       child: TextField(
         style: textTheme.titleSmall,
         textAlignVertical: TextAlignVertical.center,
-        cursorColor: SolidColors.whiteColor,
+        cursorColor: SolidColors.materialWhite,
         decoration: const InputDecoration(
           hintText: 'Search',
           prefixIcon: Icon(HugeIcons.strokeRoundedSearch01),
@@ -141,7 +142,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   //used in searchTextfield --->
   _searchMovie(String input) async {
-    final searchList = await _trendingMovies;
+    final searchList = await _futureTrendingMovies;
     setState(() {
       trendingMovies =
           searchList

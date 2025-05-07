@@ -1,10 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:movie_app/components/constants/colors.dart';
-import 'package:movie_app/components/widgets/loading.dart';
+import 'package:movie_app/core/constants/colors.dart';
+import 'package:movie_app/core/theme/theme.dart';
+import 'package:movie_app/utils/widgets/loading.dart';
 import 'package:movie_app/models/movie.dart';
-import 'package:movie_app/screens/details_screen.dart';
+import 'package:movie_app/view/details/details_view.dart';
 
 class ListViewItem extends StatelessWidget {
   final List<Movie> list;
@@ -20,7 +21,7 @@ class ListViewItem extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => DetailsScreen(movieId: list[index].id),
+            builder: (context) => DetailsView(movieId: list[index].id),
           ),
         );
       },
@@ -43,7 +44,7 @@ class ListViewItem extends StatelessWidget {
                   errorWidget:
                       (context, url, error) => const Icon(
                         HugeIcons.strokeRoundedImage02,
-                        color: SolidColors.secondaryGrayColor,
+                        color: SolidColors.materialSecondGrey,
                       ),
                   placeholder: (context, url) => const Loading(),
                 ),
@@ -52,7 +53,7 @@ class ListViewItem extends StatelessWidget {
             // movie name --->
             Text(
               textAlign: TextAlign.center,
-              style: Theme.of(context).textTheme.titleMedium,
+              style: AppTheme.titleMedium,
               list[index].originalTitle,
               maxLines: 1,
               softWrap: true,

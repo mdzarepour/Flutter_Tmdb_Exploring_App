@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:movie_app/components/constants/colors.dart';
+import 'package:movie_app/core/constants/colors.dart';
 
 class Loading extends StatelessWidget {
   const Loading({super.key});
@@ -8,7 +8,7 @@ class Loading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const SpinKitFadingFour(
-      color: SolidColors.secondaryGrayColor,
+      color: SolidColors.materialSecondGrey,
       size: 25,
     );
   }

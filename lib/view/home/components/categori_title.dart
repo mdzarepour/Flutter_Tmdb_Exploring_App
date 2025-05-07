@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movie_app/core/theme/theme.dart';
 
 class CategoriTitle extends StatelessWidget {
   final String text;
@@ -10,7 +11,7 @@ class CategoriTitle extends StatelessWidget {
       padding: const EdgeInsets.only(left: 15),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
-        children: [Text(style: Theme.of(context).textTheme.titleLarge, text)],
+        children: [Text(style: AppTheme.titleLarge, text)],
       ),
     );
   }

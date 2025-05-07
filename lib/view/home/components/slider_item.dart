@@ -1,10 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:movie_app/components/constants/colors.dart';
-import 'package:movie_app/components/widgets/loading.dart';
+import 'package:movie_app/core/constants/colors.dart';
+import 'package:movie_app/utils/widgets/loading.dart';
 import 'package:movie_app/models/movie.dart';
-import 'package:movie_app/screens/details_screen.dart';
+import 'package:movie_app/view/details/details_view.dart';
 
 class SliderItem extends StatelessWidget {
   final Size size;
@@ -23,7 +23,7 @@ class SliderItem extends StatelessWidget {
       onTap:
           () => Navigator.of(context).push(
             MaterialPageRoute(
-              builder: (context) => DetailsScreen(movieId: list[index].id),
+              builder: (context) => DetailsView(movieId: list[index].id),
             ),
           ),
       child: ClipRRect(
@@ -38,7 +38,7 @@ class SliderItem extends StatelessWidget {
             errorWidget:
                 (context, url, error) => const Icon(
                   HugeIcons.strokeRoundedImage02,
-                  color: SolidColors.secondaryGrayColor,
+                  color: SolidColors.materialSecondGrey,
                 ),
             placeholder: (context, url) => const Loading(),
           ),

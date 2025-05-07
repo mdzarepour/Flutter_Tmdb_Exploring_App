@@ -1,21 +1,24 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:movie_app/components/constants/colors.dart';
-import 'package:movie_app/components/widgets/connection_error_message.dart';
-import 'package:movie_app/components/widgets/loading.dart';
+import 'package:movie_app/core/constants/colors.dart';
+import 'package:movie_app/core/theme/theme.dart';
+import 'package:movie_app/view/details/components/connection_error_message.dart';
+import 'package:movie_app/utils/widgets/loading.dart';
 import 'package:movie_app/models/movie.dart';
 import 'package:movie_app/services/movie_service.dart';
+import 'package:movie_app/view/details/components/detail_appbar.dart';
+import 'package:movie_app/view/details/components/divider.dart';
 
-class DetailsScreen extends StatefulWidget {
+class DetailsView extends StatefulWidget {
   final int movieId;
-  const DetailsScreen({super.key, required this.movieId});
+  const DetailsView({super.key, required this.movieId});
 
   @override
-  State<DetailsScreen> createState() => _DetailsScreenState();
+  State<DetailsView> createState() => _DetailsViewState();
 }
 
-class _DetailsScreenState extends State<DetailsScreen> {
+class _DetailsViewState extends State<DetailsView> {
   late Future<Movie> movieDetails;
 
   @override
@@ -31,13 +34,12 @@ class _DetailsScreenState extends State<DetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    TextTheme textTheme = Theme.of(context).textTheme;
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: _buildAppBar(textTheme),
+      appBar: buildAppBar(context),
       body: SafeArea(
         child: RefreshIndicator(
-          color: SolidColors.redColor,
+          color: SolidColors.materialRed,
           onRefresh: () async => await _getMovieDetails(),
           child: FutureBuilder(
             future: movieDetails,
@@ -56,10 +58,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
                   child: Center(
                     child: Column(
                       children: [
-                        _buildPosterStack(size, snapshot, textTheme),
+                        _buildPosterStack(size, snapshot),
                         const SizedBox(height: 30),
-                        _buildDetailsRow(snapshot, textTheme),
-                        _buildOverView(snapshot, textTheme),
+                        _buildDetailsRow(snapshot),
+                        _buildOverView(snapshot),
                       ],
                     ),
                   ),
@@ -73,18 +75,18 @@ class _DetailsScreenState extends State<DetailsScreen> {
   }
 
   // overview text in main column --->
-  Padding _buildOverView(AsyncSnapshot<Movie> snapshot, TextTheme textTheme) {
+  Padding _buildOverView(AsyncSnapshot<Movie> snapshot) {
     return Padding(
       padding: const EdgeInsets.fromLTRB(15, 40, 15, 30),
       child: Text(
         snapshot.data!.overview,
-        style: textTheme.titleMedium!.copyWith(height: 1.9),
+        style: AppTheme.titleMedium.copyWith(height: 1.9),
       ),
     );
   }
 
   // the row contains date,popularity,language --->
-  Row _buildDetailsRow(AsyncSnapshot<Movie> snapshot, TextTheme textTheme) {
+  Row _buildDetailsRow(AsyncSnapshot<Movie> snapshot) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
@@ -93,10 +95,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
           spacing: 10,
           children: [
             const Icon(HugeIcons.strokeRoundedCalendar03),
-            Text(snapshot.data!.releaseDate, style: textTheme.headlineSmall),
+            Text(snapshot.data!.releaseDate, style: AppTheme.headlineSmall),
           ],
         ),
-        _buildDivider(),
+        buildDivider(),
         // popularity --->
         Row(
           spacing: 10,
@@ -104,11 +106,11 @@ class _DetailsScreenState extends State<DetailsScreen> {
             const Icon(HugeIcons.strokeRoundedTicket01),
             Text(
               snapshot.data!.popularity.toString().substring(0, 6),
-              style: textTheme.headlineSmall,
+              style: AppTheme.headlineSmall,
             ),
           ],
         ),
-        _buildDivider(),
+        buildDivider(),
         // language --->
         Row(
           spacing: 10,
@@ -116,7 +118,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
             const Icon(HugeIcons.strokeRoundedLanguageCircle),
             Text(
               snapshot.data!.originalLanguage,
-              style: textTheme.headlineSmall,
+              style: AppTheme.headlineSmall,
             ),
           ],
         ),
@@ -125,11 +127,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
   }
 
   // the stack contains backdrop image,rating,poster,title --->
-  Stack _buildPosterStack(
-    Size size,
-    AsyncSnapshot<Movie> snapshot,
-    TextTheme textTheme,
-  ) {
+  Stack _buildPosterStack(Size size, AsyncSnapshot<Movie> snapshot) {
     return Stack(
       children: [
         // all stack container --->
@@ -186,10 +184,10 @@ class _DetailsScreenState extends State<DetailsScreen> {
                 const Icon(
                   Icons.star_outlined,
                   size: 25,
-                  color: SolidColors.yellowColor,
+                  color: SolidColors.materialYellow,
                 ),
                 Text(
-                  style: textTheme.titleMedium,
+                  style: AppTheme.titleMedium,
                   snapshot.data!.voteAverage.toString().substring(0, 3),
                 ),
               ],
@@ -204,7 +202,7 @@ class _DetailsScreenState extends State<DetailsScreen> {
             width: 200,
             height: 65,
             child: Text(
-              style: textTheme.titleLarge!.copyWith(height: 1.8),
+              style: AppTheme.titleLarge.copyWith(height: 1.8),
               snapshot.data!.originalTitle,
               softWrap: true,
               overflow: TextOverflow.fade,
@@ -213,31 +211,6 @@ class _DetailsScreenState extends State<DetailsScreen> {
           ),
         ),
       ],
-    );
-  }
-
-  // appbar contains title,backButton --->
-  AppBar _buildAppBar(TextTheme textTheme) {
-    return AppBar(
-      // beck button =>
-      leading: InkWell(
-        onTap: () => Navigator.pop(context),
-        child: const Icon(
-          size: 30,
-          HugeIcons.strokeRoundedArrowLeft01,
-          color: SolidColors.whiteColor,
-        ),
-      ),
-      title: Text('Details', style: textTheme.titleLarge),
-    );
-  }
-
-  // the divider used in _buildDetailsRow --->
-  Container _buildDivider() {
-    return Container(
-      height: 30,
-      width: 1,
-      color: SolidColors.secondaryGrayColor,
     );
   }
 }

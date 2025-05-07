@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:movie_app/components/constants/colors.dart';
+import 'package:movie_app/core/constants/colors.dart';
 
 class ConnectionErrorMessage extends StatelessWidget {
   final String message;
@@ -14,7 +14,7 @@ class ConnectionErrorMessage extends StatelessWidget {
         const SizedBox(height: 40),
         const Icon(
           HugeIcons.strokeRoundedNoInternet,
-          color: SolidColors.secondaryGrayColor,
+          color: SolidColors.materialSecondGrey,
         ),
         Text(message, style: Theme.of(context).textTheme.headlineSmall),
       ],
