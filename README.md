@@ -50,7 +50,7 @@ used api :
 
 <hr>
 
-used package in Crypto :
+used package in MovieApp :
 
 * Dio: `dio: ^5.8.0+1`
 * SpinKit: `flutter_spinkit: ^5.2.1`
