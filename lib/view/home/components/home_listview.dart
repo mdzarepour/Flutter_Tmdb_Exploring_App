@@ -1,7 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:hugeicons/hugeicons.dart';
-import 'package:movie_app/core/constants/colors.dart';
 import 'package:movie_app/core/theme/theme.dart';
 import 'package:movie_app/utils/widgets/image_error.dart';
 import 'package:movie_app/utils/widgets/loading.dart';
