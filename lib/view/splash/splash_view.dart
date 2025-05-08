@@ -11,18 +11,17 @@ class SplashView extends StatefulWidget {
 
 class _SplashViewState extends State<SplashView> {
   @override
-  void initState() {
-    super.initState();
-    Future.delayed(const Duration(seconds: 2)).then((value) {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(
-          builder: (context) {
-            return const NavigatorView();
-          },
-        ),
-      );
-    });
-  }
+  void initState() => [super.initState(), _navigator()];
+
+  void _navigator() => Future.delayed(const Duration(seconds: 2)).then((value) {
+    Navigator.of(context).pushReplacement(
+      MaterialPageRoute(
+        builder: (context) {
+          return const NavigatorView();
+        },
+      ),
+    );
+  });
 
   @override
   Widget build(BuildContext context) {

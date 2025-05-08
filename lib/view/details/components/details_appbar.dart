@@ -5,7 +5,6 @@ import 'package:movie_app/core/theme/theme.dart';
 
 AppBar buildAppBar(BuildContext context) {
   return AppBar(
-    // beck button =>
     leading: InkWell(
       onTap: () => Navigator.pop(context),
       child: const Icon(

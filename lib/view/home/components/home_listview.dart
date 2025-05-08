@@ -3,20 +3,37 @@ import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:movie_app/core/constants/colors.dart';
 import 'package:movie_app/core/theme/theme.dart';
+import 'package:movie_app/utils/widgets/image_error.dart';
 import 'package:movie_app/utils/widgets/loading.dart';
 import 'package:movie_app/models/movie.dart';
 import 'package:movie_app/view/details/details_view.dart';
 
-class ListViewItem extends StatelessWidget {
+class HomeListView extends StatelessWidget {
+  const HomeListView({super.key, required this.list});
   final List<Movie> list;
-  final int index;
-  const ListViewItem({super.key, required this.list, required this.index});
 
   @override
   Widget build(BuildContext context) {
+    return SizedBox(
+      height: 310,
+      width: double.infinity,
+      child: ListView.builder(
+        itemCount: list.length,
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: EdgeInsets.only(left: index == 0 ? 0 : 20),
+            child: _listViewItem(context, index),
+          );
+        },
+      ),
+    );
+  }
+
+  _listViewItem(BuildContext context, int index) {
     Size size = MediaQuery.of(context).size;
     return GestureDetector(
-      //send movie id and navigate to Detail screen --->
+      // navigate to DetailsView --->
       onTap: () {
         Navigator.push(
           context,
@@ -25,13 +42,13 @@ class ListViewItem extends StatelessWidget {
           ),
         );
       },
-      // popular and upcoming movies list item --->
       child: SizedBox(
         width: size.width / 2.65,
         height: size.height,
         child: Column(
           spacing: 10,
           children: [
+            // movie image --->
             ClipRRect(
               borderRadius: const BorderRadius.all(Radius.circular(9)),
               child: SizedBox(
@@ -41,12 +58,8 @@ class ListViewItem extends StatelessWidget {
                   alignment: Alignment.topCenter,
                   fit: BoxFit.cover,
                   imageUrl: list[index].posterPath,
-                  errorWidget:
-                      (context, url, error) => const Icon(
-                        HugeIcons.strokeRoundedImage02,
-                        color: SolidColors.materialSecondGrey,
-                      ),
-                  placeholder: (context, url) => const Loading(),
+                  errorWidget: (context, url, error) => imageErrorWidget(),
+                  placeholder: (context, url) => loadingWidget(),
                 ),
               ),
             ),

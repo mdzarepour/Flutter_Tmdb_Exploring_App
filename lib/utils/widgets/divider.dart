@@ -1,4 +1,3 @@
-// the divider used in _buildDetailsRow --->
 import 'package:flutter/material.dart';
 import 'package:movie_app/core/constants/colors.dart';
 

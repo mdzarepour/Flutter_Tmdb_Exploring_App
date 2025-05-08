@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/core/theme/theme.dart';
 
-class CategoriTitle extends StatelessWidget {
+class HomeListViewTitle extends StatelessWidget {
   final String text;
-  const CategoriTitle({super.key, required this.text});
+  const HomeListViewTitle({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {

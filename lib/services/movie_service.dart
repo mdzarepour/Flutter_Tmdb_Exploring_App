@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:movie_app/core/constants/strings.dart';
 import 'package:movie_app/models/movie.dart';
-// TODO add try catch to service
 
 class MovieService {
   Map<String, String> headers = {
@@ -9,10 +8,7 @@ class MovieService {
     "Authorization": ApiStrings.bearer,
   };
   // fetch popular,topRated,upcoming,trend movies --->
-  Future<List<Movie>> getMovieList({
-    required String url,
-    required String errorMessage,
-  }) async {
+  Future<List<Movie>> getMovieList({required String url}) async {
     Response response = await Dio().get(
       url,
       queryParameters: {'language': 'en-US', 'api_key': ApiStrings.apiKey},
@@ -25,7 +21,7 @@ class MovieService {
               .toList();
       return movieList;
     } else {
-      throw (errorMessage);
+      throw ('error while fetching data');
     }
   }
 

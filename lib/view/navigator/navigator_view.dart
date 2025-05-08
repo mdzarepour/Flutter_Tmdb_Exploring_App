@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:hugeicons/hugeicons.dart';
+import 'package:movie_app/view/navigator/components/bottom_navigator.dart';
+import 'package:movie_app/view/navigator/components/navigator_appbar.dart';
 import 'package:movie_app/view/home/home_view.dart';
 import 'package:movie_app/view/search/searach_view.dart';
 
@@ -10,47 +11,27 @@ class NavigatorView extends StatefulWidget {
 }
 
 class _NavigatorViewState extends State<NavigatorView> {
-  int _selectedIndex = 0;
+  int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: _buildAppBar(),
+      appBar: navigatorAppBar(),
       body: Center(
         child: SafeArea(
           child: IndexedStack(
-            index: _selectedIndex,
+            index: selectedIndex,
             children: const [HomeView(), SearchScreen()],
           ),
         ),
       ),
 
-      bottomNavigationBar: _buildBottomNavigation(),
+      bottomNavigationBar: BottomNavigator(
+        changeView: changeView,
+        selectedIndex: selectedIndex,
+      ),
     );
   }
 
-  // bottomNavigation widget --->
-  BottomNavigationBar _buildBottomNavigation() {
-    return BottomNavigationBar(
-      currentIndex: _selectedIndex,
-      onTap: (index) {
-        setState(() => _selectedIndex = index);
-      },
-      items: const [
-        BottomNavigationBarItem(
-          label: 'Home',
-          icon: Icon(HugeIcons.strokeRoundedHome01),
-        ),
-        BottomNavigationBarItem(
-          label: 'Search',
-          icon: Icon(HugeIcons.strokeRoundedSearch01),
-        ),
-      ],
-    );
-  }
-
-  // appBar widget --->
-  AppBar _buildAppBar() {
-    return AppBar(title: const Text('Movie App'));
-  }
+  void changeView(int index) => setState(() => selectedIndex = index);
 }

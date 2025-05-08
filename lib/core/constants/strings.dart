@@ -14,3 +14,12 @@ class ApiStrings {
   static const String trendingMoviesUrl =
       'https://api.themoviedb.org/3/trending/movie/day';
 }
+
+class UiString {
+  static const catTitle1 = 'Popular Movies';
+  static const catTitle2 = 'Top Rated Movies';
+  static const catTitle3 = 'Upcoming Movies';
+  static const connectionProplem = 'Oop Connection problem!';
+  static const tryAgain = 'Try Again';
+  static const snackBarMessage = 'Movies are already updated';
+}

@@ -1,3 +1,6 @@
+const String backdropImageBaseUrl = 'https://image.tmdb.org/t/p/original/';
+const String posterImageBaseUrld = 'https://image.tmdb.org/t/p/w500/';
+
 class Movie {
   final String originalLanguage;
   final String originalTitle;
@@ -20,9 +23,6 @@ class Movie {
     required this.id,
   });
   factory Movie.fromJson(Map<String, dynamic> jsonMap) {
-    const String backdropImageBaseUrl = 'https://image.tmdb.org/t/p/original/';
-    const String posterImageBaseUrld =
-        'https://image.tmdb.org/t/p/w500/'; // corrected this line
     return Movie(
       backDropPath: backdropImageBaseUrl + jsonMap['backdrop_path'],
       originalLanguage: jsonMap['original_language'],
