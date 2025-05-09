@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/core/theme/theme.dart';
+import 'package:movie_app/core/theme/widget_theme.dart';
 
 class HomeListViewTitle extends StatelessWidget {
   final String text;
@@ -11,7 +11,7 @@ class HomeListViewTitle extends StatelessWidget {
       padding: const EdgeInsets.only(left: 15),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
-        children: [Text(style: AppTheme.titleLarge, text)],
+        children: [Text(style: ComponentsTheme.titleLarge, text)],
       ),
     );
   }

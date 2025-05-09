@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class SolidColors {
-  static const Color materialBackgroundColor = Color(0xff242A32);
+  static const Color scaffoldDarkBackGround = Color(0xff242A32);
+  static const Color scaffoldLisghtBackGround = Color.fromARGB(255, 54, 54, 54);
   static const Color materialWhite = Color(0xffFFFFFF);
   static const Color materialSecondGrey = Color(0xff67686D);
   static const Color materialFirstGrey = Color(0xff3A3F47);

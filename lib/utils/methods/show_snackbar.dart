@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/core/constants/colors.dart';
 import 'package:movie_app/core/constants/strings.dart';
-import 'package:movie_app/core/theme/theme.dart';
+import 'package:movie_app/core/theme/widget_theme.dart';
 
 void showSnackbar(BuildContext context) {
   ScaffoldMessenger.of(context).showSnackBar(
@@ -13,7 +13,7 @@ void showSnackbar(BuildContext context) {
       margin: EdgeInsets.only(bottom: 10),
       content: Text(
         textAlign: TextAlign.center,
-        style: AppTheme.titleMedium,
+        style: ComponentsTheme.titleMedium,
         UiString.snackBarMessage,
       ),
     ),

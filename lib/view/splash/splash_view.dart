@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/core/theme/theme.dart';
+import 'package:movie_app/core/theme/widget_theme.dart';
 import 'package:movie_app/view/navigator/navigator_view.dart';
 
 class SplashView extends StatefulWidget {
@@ -31,7 +31,7 @@ class _SplashViewState extends State<SplashView> {
           spacing: 30,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(style: AppTheme.titleLarge, 'Movie App'),
+            const Text(style: ComponentsTheme.titleLarge, 'Movie App'),
             ClipRRect(
               borderRadius: const BorderRadius.all(Radius.circular(50)),
               child: Image.asset(height: 100, 'assets/images/logo.png'),

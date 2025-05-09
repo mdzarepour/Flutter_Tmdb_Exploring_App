@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/core/theme/theme.dart';
+import 'package:movie_app/core/theme/widget_theme.dart';
 import 'package:movie_app/models/movie.dart';
 import 'package:movie_app/utils/widgets/data_error.dart';
 import 'package:movie_app/utils/widgets/loading.dart';
@@ -69,7 +69,7 @@ class _DetailsViewState extends State<DetailsView> {
       padding: const EdgeInsets.fromLTRB(15, 40, 15, 30),
       child: Text(
         movieDetails.overview,
-        style: AppTheme.titleMedium.copyWith(height: 1.9),
+        style: ComponentsTheme.titleMedium.copyWith(height: 1.9),
       ),
     );
   }

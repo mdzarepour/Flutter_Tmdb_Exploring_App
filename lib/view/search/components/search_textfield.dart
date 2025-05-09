@@ -11,18 +11,19 @@ class SearchTextfield extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
     return Container(
       width: size.width / 1.3,
-      height: size.height / 18.5,
       decoration: const BoxDecoration(
         color: SolidColors.materialFirstGrey,
         borderRadius: BorderRadius.all(Radius.circular(12)),
       ),
       child: TextField(
-        //  style: textTheme.titleSmall,
         textAlignVertical: TextAlignVertical.center,
         cursorColor: SolidColors.materialWhite,
         decoration: const InputDecoration(
+          isDense: true,
+          contentPadding: EdgeInsets.symmetric(vertical: 12),
           hintText: 'Search',
           prefixIcon: Icon(HugeIcons.strokeRoundedSearch01),
+          border: InputBorder.none,
         ),
         onChanged: searchMovie,
       ),

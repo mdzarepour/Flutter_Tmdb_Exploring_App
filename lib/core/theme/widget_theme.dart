@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/core/constants/colors.dart';
 
-class AppTheme {
+class ComponentsTheme {
   //outlined button theme -->
   static ButtonStyle outlinedButtonTheme = OutlinedButton.styleFrom(
     iconColor: SolidColors.materialWhite,
@@ -16,7 +16,7 @@ class AppTheme {
       BottomNavigationBarThemeData(
         selectedItemColor: SolidColors.materialRed,
         unselectedItemColor: SolidColors.materialWhite,
-        backgroundColor: SolidColors.materialBackgroundColor,
+        backgroundColor: SolidColors.scaffoldDarkBackGround,
       );
 
   // icon theme --->
@@ -42,7 +42,7 @@ class AppTheme {
   static const AppBarTheme appBarTheme = AppBarTheme(
     scrolledUnderElevation: 0,
     centerTitle: true,
-    backgroundColor: SolidColors.materialBackgroundColor,
+    backgroundColor: SolidColors.scaffoldDarkBackGround,
     titleTextStyle: TextStyle(
       color: SolidColors.materialRed,
       fontSize: 30,

@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_app/core/constants/colors.dart';
-import 'package:movie_app/core/theme/theme.dart';
+import 'package:movie_app/core/theme/widget_theme.dart';
 import 'package:movie_app/models/movie.dart';
 import 'package:movie_app/utils/widgets/image_error.dart';
 import 'package:movie_app/utils/widgets/loading.dart';
@@ -80,7 +80,7 @@ class DetailsPoster extends StatelessWidget {
               color: SolidColors.materialYellow,
             ),
             Text(
-              style: AppTheme.titleMedium,
+              style: ComponentsTheme.titleMedium,
               movieDetails.voteAverage.toString().substring(0, 3),
             ),
           ],
@@ -97,7 +97,7 @@ class DetailsPoster extends StatelessWidget {
         width: 200,
         height: 65,
         child: Text(
-          style: AppTheme.titleLarge.copyWith(height: 1.8),
+          style: ComponentsTheme.titleLarge.copyWith(height: 1.8),
           movieDetails.originalTitle,
           softWrap: true,
           overflow: TextOverflow.fade,

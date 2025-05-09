@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:movie_app/core/constants/colors.dart';
-import 'package:movie_app/core/theme/theme.dart';
+import 'package:movie_app/core/theme/widget_theme.dart';
 
 AppBar buildAppBar(BuildContext context) {
   return AppBar(
@@ -13,6 +13,6 @@ AppBar buildAppBar(BuildContext context) {
         color: SolidColors.materialWhite,
       ),
     ),
-    title: const Text('Details', style: AppTheme.titleLarge),
+    title: const Text('Details', style: ComponentsTheme.titleLarge),
   );
 }

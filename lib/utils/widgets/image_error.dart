@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:movie_app/core/constants/colors.dart';
-import 'package:movie_app/core/theme/theme.dart';
+import 'package:movie_app/core/theme/widget_theme.dart';
 
 Column imageErrorWidget() {
   return const Column(
@@ -12,7 +12,7 @@ Column imageErrorWidget() {
         HugeIcons.strokeRoundedNoInternet,
         color: SolidColors.materialSecondGrey,
       ),
-      Text('image not found!', style: AppTheme.titleSmall),
+      Text('image not found!', style: ComponentsTheme.titleSmall),
     ],
   );
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:hugeicons/hugeicons.dart';
-import 'package:movie_app/core/theme/theme.dart';
+import 'package:movie_app/core/theme/widget_theme.dart';
 import 'package:movie_app/models/movie.dart';
 import 'package:movie_app/utils/widgets/divider.dart';
 
@@ -18,7 +18,10 @@ class DetailsInformation extends StatelessWidget {
           spacing: 10,
           children: [
             const Icon(HugeIcons.strokeRoundedCalendar03),
-            Text(movieDetails.releaseDate, style: AppTheme.headlineSmall),
+            Text(
+              movieDetails.releaseDate,
+              style: ComponentsTheme.headlineSmall,
+            ),
           ],
         ),
         buildDivider(),
@@ -29,7 +32,7 @@ class DetailsInformation extends StatelessWidget {
             const Icon(HugeIcons.strokeRoundedTicket01),
             Text(
               movieDetails.popularity.toString().substring(0, 6),
-              style: AppTheme.headlineSmall,
+              style: ComponentsTheme.headlineSmall,
             ),
           ],
         ),
@@ -39,7 +42,10 @@ class DetailsInformation extends StatelessWidget {
           spacing: 10,
           children: [
             const Icon(HugeIcons.strokeRoundedLanguageCircle),
-            Text(movieDetails.originalLanguage, style: AppTheme.headlineSmall),
+            Text(
+              movieDetails.originalLanguage,
+              style: ComponentsTheme.headlineSmall,
+            ),
           ],
         ),
       ],

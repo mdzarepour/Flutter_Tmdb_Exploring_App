@@ -16,7 +16,7 @@ class _NavigatorViewState extends State<NavigatorView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: navigatorAppBar(),
+      appBar: navigatorAppBar(context),
       body: Center(
         child: SafeArea(
           child: IndexedStack(

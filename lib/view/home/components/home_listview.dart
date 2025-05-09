@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:movie_app/core/theme/theme.dart';
+import 'package:movie_app/core/theme/widget_theme.dart';
 import 'package:movie_app/utils/widgets/image_error.dart';
 import 'package:movie_app/utils/widgets/loading.dart';
 import 'package:movie_app/models/movie.dart';
@@ -64,7 +64,7 @@ class HomeListView extends StatelessWidget {
             // movie name --->
             Text(
               textAlign: TextAlign.center,
-              style: AppTheme.titleMedium,
+              style: ComponentsTheme.titleMedium,
               list[index].originalTitle,
               maxLines: 1,
               softWrap: true,
