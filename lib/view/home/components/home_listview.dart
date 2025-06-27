@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_app/core/theme/widget_theme.dart';
-import 'package:movie_app/utils/widgets/image_error.dart';
-import 'package:movie_app/utils/widgets/loading.dart';
+import 'package:movie_app/core/utils/widgets/image_error.dart';
+import 'package:movie_app/core/utils/widgets/loading.dart';
 import 'package:movie_app/models/movie.dart';
 import 'package:movie_app/view/details/details_view.dart';
 
@@ -21,14 +21,20 @@ class HomeListView extends StatelessWidget {
         itemBuilder: (context, index) {
           return Padding(
             padding: EdgeInsets.only(left: index == 0 ? 0 : 20),
-            child: _listViewItem(context, index),
+            child: ListViewItem(index: index, list: list),
           );
         },
       ),
     );
   }
+}
 
-  _listViewItem(BuildContext context, int index) {
+class ListViewItem extends StatelessWidget {
+  const ListViewItem({super.key, required this.index, required this.list});
+  final int index;
+  final List<Movie> list;
+  @override
+  Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return GestureDetector(
       // navigate to DetailsView --->
@@ -56,7 +62,8 @@ class HomeListView extends StatelessWidget {
                   alignment: Alignment.topCenter,
                   fit: BoxFit.cover,
                   imageUrl: list[index].posterPath,
-                  errorWidget: (context, url, error) => imageErrorWidget(),
+                  errorWidget:
+                      (context, url, error) => const ImageErrorWidget(),
                   placeholder: (context, url) => loadingWidget(),
                 ),
               ),

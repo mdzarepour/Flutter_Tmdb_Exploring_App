@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:movie_app/core/constants/strings.dart';
 import 'package:movie_app/models/movie.dart';
 import 'package:movie_app/services/movie_service.dart';
-import 'package:movie_app/utils/methods/show_snackbar.dart';
-import 'package:movie_app/utils/widgets/data_error.dart';
-import 'package:movie_app/utils/widgets/loading.dart';
+import 'package:movie_app/core/utils/methods/show_snackbar.dart';
+import 'package:movie_app/core/utils/widgets/data_error.dart';
+import 'package:movie_app/core/utils/widgets/loading.dart';
 import 'package:movie_app/view/search/components/search_gridview.dart';
 import 'package:movie_app/view/search/components/search_textfield.dart';
 
@@ -23,39 +23,45 @@ class _SearchScreenState extends State<SearchScreen> {
   void initState() => [super.initState(), _fetchTrendingMovies()];
 
   _fetchTrendingMovies() async {
-    _futureTrendingMovies = MovieService().getMovieList(
-      url: ApiStrings.trendingMoviesUrl,
-    );
-    trendingMovies = await _futureTrendingMovies;
+    setState(() {
+      _futureTrendingMovies = MovieService().getMovieList(
+        url: ApiStrings.trendingMoviesUrl,
+      );
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      body: RefreshIndicator(
-        onRefresh: () async => [_fetchTrendingMovies(), showSnackbar(context)],
-        child: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Center(
-              child: FutureBuilder(
-                future: _futureTrendingMovies,
-                builder:
-                    (context, snapshot) =>
-                        snapshot.hasData
-                            ? Column(
-                              children: [
-                                SearchTextfield(searchMovie: searchMovie),
-                                SizedBox(height: size.height * 0.04),
-                                SearchGridview(list: trendingMovies),
-                              ],
-                            )
-                            : snapshot.connectionState ==
-                                ConnectionState.waiting
-                            ? loadingWidget()
-                            : dataErrorWidget(_fetchTrendingMovies),
-              ),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Center(
+            child: FutureBuilder(
+              future: _futureTrendingMovies,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return loadingWidget();
+                } else if (snapshot.hasError) {
+                  return DataErrorWidget(fetchAgain: _fetchTrendingMovies);
+                } else {
+                  trendingMovies = snapshot.data!;
+                  return RefreshIndicator(
+                    onRefresh: () async {
+                      _fetchTrendingMovies();
+                      showSnackbar(context);
+                    },
+                    child: Column(
+                      children: [
+                        SearchTextfield(searchMovie: searchMovie),
+                        SizedBox(height: size.height * 0.04),
+                        SearchGridview(list: trendingMovies),
+                      ],
+                    ),
+                  );
+                }
+              },
             ),
           ),
         ),

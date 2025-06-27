@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:movie_app/utils/widgets/image_error.dart';
-import 'package:movie_app/utils/widgets/loading.dart';
+import 'package:movie_app/core/utils/widgets/image_error.dart';
+import 'package:movie_app/core/utils/widgets/loading.dart';
 import 'package:movie_app/models/movie.dart';
 import 'package:movie_app/view/details/details_view.dart';
 
@@ -25,13 +25,20 @@ class HomeSlider extends StatelessWidget {
           enlargeCenterPage: true,
         ),
         itemBuilder: (context, index, realIndex) {
-          return _listViewItem(index, list, context);
+          return SliderViewItem(list: list, index: index);
         },
       ),
     );
   }
+}
 
-  _listViewItem(int index, List<Movie> list, BuildContext context) {
+class SliderViewItem extends StatelessWidget {
+  const SliderViewItem({super.key, required this.list, required this.index});
+  final int index;
+  final List<Movie> list;
+
+  @override
+  Widget build(BuildContext context) {
     return GestureDetector(
       onTap:
           () => Navigator.of(context).push(
@@ -48,7 +55,7 @@ class HomeSlider extends StatelessWidget {
           child: CachedNetworkImage(
             fit: BoxFit.cover,
             imageUrl: list[index].posterPath,
-            errorWidget: (context, url, error) => imageErrorWidget(),
+            errorWidget: (context, url, error) => const ImageErrorWidget(),
             placeholder: (context, url) => loadingWidget(),
           ),
         ),

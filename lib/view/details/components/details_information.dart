@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:movie_app/core/theme/widget_theme.dart';
 import 'package:movie_app/models/movie.dart';
-import 'package:movie_app/utils/widgets/divider.dart';
+import 'package:movie_app/core/utils/widgets/divider.dart';
 
 class DetailsInformation extends StatelessWidget {
   const DetailsInformation({super.key, required this.movieDetails});

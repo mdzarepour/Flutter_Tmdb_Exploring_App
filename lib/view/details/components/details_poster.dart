@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:movie_app/core/constants/colors.dart';
 import 'package:movie_app/core/theme/widget_theme.dart';
 import 'package:movie_app/models/movie.dart';
-import 'package:movie_app/utils/widgets/image_error.dart';
-import 'package:movie_app/utils/widgets/loading.dart';
+import 'package:movie_app/core/utils/widgets/image_error.dart';
+import 'package:movie_app/core/utils/widgets/loading.dart';
 //TODO data error fetching logic not works possibly --->
 
 class DetailsPoster extends StatelessWidget {
@@ -35,7 +35,7 @@ class DetailsPoster extends StatelessWidget {
           fit: BoxFit.cover,
           alignment: Alignment.topCenter,
           imageUrl: movieDetails.backDropPath,
-          errorWidget: (context, url, error) => imageErrorWidget(),
+          errorWidget: (context, url, error) => const ImageErrorWidget(),
           placeholder: (context, url) => loadingWidget(),
         ),
       ),

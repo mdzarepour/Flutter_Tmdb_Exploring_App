@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:movie_app/models/movie.dart';
-import 'package:movie_app/utils/widgets/image_error.dart';
-import 'package:movie_app/utils/widgets/loading.dart';
+import 'package:movie_app/core/utils/widgets/image_error.dart';
+import 'package:movie_app/core/utils/widgets/loading.dart';
 import 'package:movie_app/view/details/details_view.dart';
 
 class SearchGridview extends StatelessWidget {
@@ -25,13 +25,20 @@ class SearchGridview extends StatelessWidget {
           mainAxisExtent: 300,
         ),
         itemBuilder: (context, index) {
-          return _buildGridvewItem(context, index);
+          return GridViewItem(list: list, index: index);
         },
       ),
     );
   }
+}
 
-  GestureDetector _buildGridvewItem(BuildContext context, int index) {
+class GridViewItem extends StatelessWidget {
+  const GridViewItem({super.key, required this.list, required this.index});
+  final List<Movie> list;
+  final int index;
+
+  @override
+  Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -48,7 +55,7 @@ class SearchGridview extends StatelessWidget {
           fit: BoxFit.cover,
           imageUrl: list[index].posterPath,
           placeholder: (context, url) => loadingWidget(),
-          errorWidget: (context, url, error) => imageErrorWidget(),
+          errorWidget: (context, url, error) => const ImageErrorWidget(),
         ),
       ),
     );

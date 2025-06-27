@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/core/theme/widget_theme.dart';
+import 'package:movie_app/core/utils/widgets/data_error.dart';
 import 'package:movie_app/models/movie.dart';
-import 'package:movie_app/utils/widgets/data_error.dart';
-import 'package:movie_app/utils/widgets/loading.dart';
+import 'package:movie_app/core/utils/widgets/loading.dart';
 import 'package:movie_app/services/movie_service.dart';
 import 'package:movie_app/view/details/components/details_appbar.dart';
 import 'package:movie_app/view/details/components/details_information.dart';
@@ -18,14 +18,12 @@ class DetailsView extends StatefulWidget {
 
 class _DetailsViewState extends State<DetailsView> {
   late Future<Movie> _futureMovieDetails;
-  late Movie movieDetails;
 
   @override
   void initState() => [super.initState(), _fetchMovieDetails()];
 
   _fetchMovieDetails() async {
     _futureMovieDetails = MovieService().getMovieDetails(widget.movieId);
-    movieDetails = await _futureMovieDetails;
   }
 
   @override
@@ -34,30 +32,25 @@ class _DetailsViewState extends State<DetailsView> {
       appBar: buildAppBar(context),
       body: SafeArea(
         child: Center(
-          child: SingleChildScrollView(
-            child: FutureBuilder(
-              future: _futureMovieDetails,
-              builder:
-                  (context, snapshot) =>
-                      snapshot.hasData
-                          ? SafeArea(
-                            child: Center(
-                              child: Column(
-                                children: [
-                                  DetailsPoster(movieDetails: movieDetails),
-                                  const SizedBox(height: 30),
-                                  DetailsInformation(
-                                    movieDetails: movieDetails,
-                                  ),
-                                  _buildOverView(movieDetails),
-                                ],
-                              ),
-                            ),
-                          )
-                          : snapshot.connectionState == ConnectionState.waiting
-                          ? loadingWidget()
-                          : dataErrorWidget(_fetchMovieDetails),
-            ),
+          child: FutureBuilder(
+            future: _futureMovieDetails,
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return loadingWidget();
+              } else if (snapshot.hasError) {
+                return DataErrorWidget(fetchAgain: _fetchMovieDetails);
+              } else {
+                Movie movieDetail = snapshot.data!;
+                return Column(
+                  children: [
+                    DetailsPoster(movieDetails: movieDetail),
+                    const SizedBox(height: 30),
+                    DetailsInformation(movieDetails: movieDetail),
+                    _buildOverView(movieDetail),
+                  ],
+                );
+              }
+            },
           ),
         ),
       ),
