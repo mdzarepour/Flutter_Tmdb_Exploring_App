@@ -3,7 +3,7 @@ import 'package:movie_app/view/navigator/components/bottom_navigator.dart';
 import 'package:movie_app/view/navigator/components/navigator_appbar.dart';
 import 'package:movie_app/view/home/home_view.dart';
 import 'package:movie_app/view/search/searach_view.dart';
-
+//TODO ==< delete scafoold from home nad search becuase its get it from navigatr scaffold
 class NavigatorView extends StatefulWidget {
   const NavigatorView({super.key});
   @override
