@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:movie_app/core/utils/methods/global_show_snackbar.dart';
 import 'package:movie_app/core/utils/widgets/global_data_error_widget.dart';
 import 'package:movie_app/screens/home_screen/components/home_screen_listview_widget.dart';
-import 'package:movie_app/screens/home_screen/components/home_screen_listview_title_widget.dart';
+import 'package:movie_app/screens/home_screen/components/home_screen_listview_widget_title.dart';
 import 'package:movie_app/screens/home_screen/components/home_screen__slider_widget.dart';
 import 'package:movie_app/core/constants/constant_strings.dart';
 import 'package:movie_app/services/movie_service.dart';
@@ -61,15 +61,15 @@ class _HomeScreenState extends State<HomeScreen> {
               child: ListView(
                 physics: const BouncingScrollPhysics(),
                 children: [
-                  const HomeScreenListViewTitleWidget(
+                  const HomeScreenListViewWidgetTitle(
                     text: ConstantUiStrings.catTitleIndex0,
                   ),
                   HomeScreenSliderWidget(list: moviesLists[0]),
-                  const HomeScreenListViewTitleWidget(
+                  const HomeScreenListViewWidgetTitle(
                     text: ConstantUiStrings.catTitleIndex1,
                   ),
                   HomeScreenListViewWidget(list: moviesLists[1]),
-                  const HomeScreenListViewTitleWidget(
+                  const HomeScreenListViewWidgetTitle(
                     text: ConstantUiStrings.catTitleIndex2,
                   ),
                   HomeScreenListViewWidget(list: moviesLists[2]),

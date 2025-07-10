@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/core/theme/app_widget_theme.dart';
 
-class HomeScreenListViewTitleWidget extends StatelessWidget {
+class HomeScreenListViewWidgetTitle extends StatelessWidget {
   final String text;
-  const HomeScreenListViewTitleWidget({super.key, required this.text});
+  const HomeScreenListViewWidgetTitle({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {
