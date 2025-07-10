@@ -1,23 +1,29 @@
 import 'package:dio/dio.dart';
-import 'package:movie_app/core/constants/strings.dart';
-import 'package:movie_app/models/movie.dart';
+import 'package:movie_app/core/constants/constant_strings.dart';
+import 'package:movie_app/models/movie_model.dart';
 
 class MovieService {
   Map<String, String> headers = {
-    "accept": ApiStrings.accept,
-    "Authorization": ApiStrings.bearer,
+    "accept": CopnstantServiceStrings.accept,
+    "Authorization": CopnstantServiceStrings.bearer,
   };
   // fetch popular,topRated,upcoming,trend movies --->
-  Future<List<Movie>> getMovieList({required String url}) async {
+  Future<List<MovieModel>> getMovieList({required String url}) async {
     Response response = await Dio().get(
       url,
-      queryParameters: {'language': 'en-US', 'api_key': ApiStrings.apiKey},
-      options: Options(method: ApiStrings.method, headers: headers),
+      queryParameters: {
+        'language': 'en-US',
+        'api_key': CopnstantServiceStrings.apiKey,
+      },
+      options: Options(
+        method: CopnstantServiceStrings.method,
+        headers: headers,
+      ),
     );
     if (response.statusCode == 200) {
-      List<Movie> movieList =
+      List<MovieModel> movieList =
           response.data['results']
-              .map<Movie>((e) => Movie.fromJson(e))
+              .map<MovieModel>((e) => MovieModel.fromJson(e))
               .toList();
       return movieList;
     } else {
@@ -26,13 +32,16 @@ class MovieService {
   }
 
   // fetch movie details using movieId --->
-  Future<Movie> getMovieDetails(int movieId) async {
+  Future<MovieModel> getMovieDetails(int movieId) async {
     Response response = await Dio().get(
-      options: Options(headers: headers, method: ApiStrings.method),
+      options: Options(
+        headers: headers,
+        method: CopnstantServiceStrings.method,
+      ),
       'https://api.themoviedb.org/3/movie/$movieId?language=en-US',
     );
     if (response.statusCode == 200) {
-      Movie movie = Movie.fromJson(response.data);
+      MovieModel movie = MovieModel.fromJson(response.data);
       return movie;
     } else {
       throw ('error while fetching movie details');
