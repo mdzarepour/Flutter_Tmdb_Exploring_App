@@ -33,39 +33,37 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: Center(
-            child: FutureBuilder(
-              future: _futureTrendingMovies,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return globalLoadingWidget();
-                } else if (snapshot.hasError) {
-                  return GlobalDataErrorWidget(
-                    fetchAgain: _fetchTrendingMovies,
-                  );
-                } else {
-                  trendingMovies = snapshot.data!;
-                  return RefreshIndicator(
-                    onRefresh: () async {
-                      _fetchTrendingMovies();
-                      globalShowSnackbar(context);
-                    },
-                    child: Column(
-                      children: [
-                        SearchScreenTextfieldWidget(searchMovie: searchMovie),
-                        SizedBox(height: size.height * 0.04),
-                        SearchScreenGridviewWidget(list: trendingMovies),
-                      ],
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: FutureBuilder(
+          future: _futureTrendingMovies,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return globalLoadingWidget();
+            } else if (snapshot.hasError) {
+              return GlobalDataErrorWidget(fetchAgain: _fetchTrendingMovies);
+            } else {
+              trendingMovies = snapshot.data!;
+              return RefreshIndicator(
+                onRefresh: () async {
+                  _fetchTrendingMovies();
+                  globalShowSnackbar(context);
+                },
+                child: Column(
+                  spacing: 5,
+                  children: [
+                    const SizedBox(height: 20),
+                    SearchScreenTextfieldWidget(searchMovie: searchMovie),
+                    SizedBox(height: size.height * 0.02),
+                    Expanded(
+                      child: SearchScreenGridviewWidget(list: trendingMovies),
                     ),
-                  );
-                }
-              },
-            ),
-          ),
+                  ],
+                ),
+              );
+            }
+          },
         ),
       ),
     );

@@ -9,6 +9,7 @@ class GlobalImageErrorWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
       spacing: 10,
       children: [
         SizedBox(height: 40),
@@ -16,7 +17,11 @@ class GlobalImageErrorWidget extends StatelessWidget {
           HugeIcons.strokeRoundedNoInternet,
           color: ConstantColors.materialSecondGrey,
         ),
-        Text('image not found!', style: AppWidgetTheme.titleSmall),
+        Text(
+          textAlign: TextAlign.center,
+          'image not found!',
+          style: AppWidgetTheme.titleSmall,
+        ),
       ],
     );
   }

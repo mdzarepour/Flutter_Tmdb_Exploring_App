@@ -43,42 +43,41 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: FutureBuilder(
-        future: _futureMovieLists,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return globalLoadingWidget();
-          } else if (snapshot.hasError) {
-            return GlobalDataErrorWidget(fetchAgain: _fetchMovieLists);
-          } else {
-            List<List<MovieModel>> moviesLists = snapshot.data!;
-            return RefreshIndicator(
-              onRefresh: () async {
-                _fetchMovieLists();
-                globalShowSnackbar(context);
-              },
-              child: ListView(
-                physics: const BouncingScrollPhysics(),
-                children: [
-                  const HomeScreenListViewWidgetTitle(
-                    text: ConstantUiStrings.catTitleIndex0,
-                  ),
-                  HomeScreenSliderWidget(list: moviesLists[0]),
-                  const HomeScreenListViewWidgetTitle(
-                    text: ConstantUiStrings.catTitleIndex1,
-                  ),
-                  HomeScreenListViewWidget(list: moviesLists[1]),
-                  const HomeScreenListViewWidgetTitle(
-                    text: ConstantUiStrings.catTitleIndex2,
-                  ),
-                  HomeScreenListViewWidget(list: moviesLists[2]),
-                ],
-              ),
-            );
-          }
-        },
-      ),
+    return FutureBuilder(
+      future: _futureMovieLists,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return globalLoadingWidget();
+        } else if (snapshot.hasError) {
+          return GlobalDataErrorWidget(fetchAgain: _fetchMovieLists);
+        } else {
+          List<List<MovieModel>> moviesLists = snapshot.data!;
+          return RefreshIndicator(
+            onRefresh: () async {
+              _fetchMovieLists();
+              globalShowSnackbar(context);
+            },
+            child: ListView(
+              padding: const EdgeInsets.symmetric(horizontal: 25),
+              physics: const BouncingScrollPhysics(),
+              children: [
+                const HomeScreenListViewWidgetTitle(
+                  text: ConstantUiStrings.catTitleIndex0,
+                ),
+                HomeScreenSliderWidget(list: moviesLists[0]),
+                const HomeScreenListViewWidgetTitle(
+                  text: ConstantUiStrings.catTitleIndex1,
+                ),
+                HomeScreenListViewWidget(list: moviesLists[1]),
+                const HomeScreenListViewWidgetTitle(
+                  text: ConstantUiStrings.catTitleIndex2,
+                ),
+                HomeScreenListViewWidget(list: moviesLists[2]),
+              ],
+            ),
+          );
+        }
+      },
     );
   }
 }

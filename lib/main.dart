@@ -18,5 +18,8 @@ class MovieApp extends StatelessWidget {
     );
   }
 }
+
 //TODO data error fetching logic not works possibly --->
 //TODO ==< delete scafoold from home nad search becuase its get it from navigatr scaffold
+//TODO home and search screens scaffold deleted bt not tested
+//TODO manage imports in core/imports

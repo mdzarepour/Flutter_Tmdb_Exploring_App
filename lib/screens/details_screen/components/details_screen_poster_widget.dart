@@ -53,6 +53,9 @@ class DetailsScreenPosterWidget extends StatelessWidget {
           child: CachedNetworkImage(
             fit: BoxFit.cover,
             imageUrl: movieDetails.posterPath,
+            errorWidget:
+                (context, url, error) => const GlobalImageErrorWidget(),
+            placeholder: (context, url) => globalLoadingWidget(),
           ),
         ),
       ),

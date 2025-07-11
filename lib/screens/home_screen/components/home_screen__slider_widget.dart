@@ -10,21 +10,18 @@ class HomeScreenSliderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return SizedBox(
-      height: size.height / 2.95,
-      child: CarouselSlider.builder(
-        itemCount: list.length,
-        options: CarouselOptions(
-          height: size.height / 2.95,
-          autoPlay: true,
-          autoPlayCurve: Curves.easeInOut,
-          viewportFraction: 0.55,
-          enlargeCenterPage: true,
-        ),
-        itemBuilder: (context, index, realIndex) {
-          return HomeScreenSliderWidgetCard(list: list, index: index);
-        },
+    return CarouselSlider.builder(
+      itemCount: list.length,
+      options: CarouselOptions(
+        height: size.height / 2.95,
+        autoPlay: true,
+        autoPlayCurve: Curves.easeInOut,
+        viewportFraction: 0.55,
+        enlargeCenterPage: true,
       ),
+      itemBuilder: (context, index, realIndex) {
+        return HomeScreenSliderWidgetCard(list: list, index: index);
+      },
     );
   }
 }
