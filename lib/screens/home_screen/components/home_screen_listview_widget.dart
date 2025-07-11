@@ -1,6 +1,7 @@
-import 'package:flutter/material.dart';
+import 'package:movie_app/core/imports/import_core.dart';
 import 'package:movie_app/models/movie_model.dart';
-import 'package:movie_app/screens/home_screen/components/home_screen_listview_widget_card.dart';
+
+import 'home_screen_listview_widget_card.dart';
 
 class HomeScreenListViewWidget extends StatelessWidget {
   const HomeScreenListViewWidget({super.key, required this.list});

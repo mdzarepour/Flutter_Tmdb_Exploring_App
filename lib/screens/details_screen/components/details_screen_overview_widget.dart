@@ -1,6 +1,4 @@
-import 'package:flutter/widgets.dart';
-
-import '../../../core/theme/app_widget_theme.dart';
+import 'package:movie_app/core/imports/import_core.dart';
 
 class DetailsScreenOverviewWidget extends StatelessWidget {
   final String overViewText;

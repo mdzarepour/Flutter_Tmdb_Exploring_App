@@ -1,8 +1,5 @@
-import 'package:flutter/cupertino.dart';
-import 'package:hugeicons/hugeicons.dart';
-import 'package:movie_app/core/theme/app_widget_theme.dart';
+import 'package:movie_app/core/imports/import_core.dart';
 import 'package:movie_app/models/movie_model.dart';
-import 'package:movie_app/core/utils/widgets/global_divider_widget.dart';
 
 class DetailsScreenInformationWidget extends StatelessWidget {
   const DetailsScreenInformationWidget({super.key, required this.movieDetails});

@@ -1,9 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
-import 'package:flutter/material.dart';
-import 'package:movie_app/core/utils/widgets/global_image_error_widget.dart';
-import 'package:movie_app/core/utils/widgets/global_loading_widget.dart';
-import 'package:movie_app/models/movie_model.dart';
-import 'package:movie_app/screens/details_screen/details_screen.dart';
+import 'package:movie_app/core/imports/import_core.dart';
+import 'package:movie_app/core/imports/import_internet_essentials.dart';
+import '../../details_screen/details_screen.dart';
 
 class HomeScreenSliderWidgetCard extends StatelessWidget {
   const HomeScreenSliderWidgetCard({

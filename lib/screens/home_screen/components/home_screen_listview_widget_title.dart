@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:movie_app/core/theme/app_widget_theme.dart';
+import 'package:movie_app/core/imports/import_core.dart';
 
 class HomeScreenListViewWidgetTitle extends StatelessWidget {
   final String text;

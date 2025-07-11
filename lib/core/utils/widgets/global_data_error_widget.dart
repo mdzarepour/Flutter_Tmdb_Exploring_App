@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:movie_app/core/constants/constant_strings.dart';
-import 'package:movie_app/core/theme/app_widget_theme.dart';
+import 'package:movie_app/core/imports/import_core.dart';
 
 class GlobalDataErrorWidget extends StatelessWidget {
   const GlobalDataErrorWidget({super.key, required this.fetchAgain});

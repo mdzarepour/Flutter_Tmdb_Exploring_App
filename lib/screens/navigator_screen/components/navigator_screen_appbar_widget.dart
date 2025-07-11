@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:movie_app/core/imports/import_core.dart';
 
 class NavigatorScreenAppbarWidget extends StatelessWidget {
   const NavigatorScreenAppbarWidget({super.key});

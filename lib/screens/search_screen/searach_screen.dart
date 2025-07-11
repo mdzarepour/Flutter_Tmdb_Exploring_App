@@ -1,12 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:movie_app/core/constants/constant_strings.dart';
-import 'package:movie_app/models/movie_model.dart';
-import 'package:movie_app/services/movie_service.dart';
-import 'package:movie_app/core/utils/methods/global_show_snackbar.dart';
-import 'package:movie_app/core/utils/widgets/global_data_error_widget.dart';
-import 'package:movie_app/core/utils/widgets/global_loading_widget.dart';
-import 'package:movie_app/screens/search_screen/components/search_screen_gridview_widget.dart';
-import 'package:movie_app/screens/search_screen/components/search_screen_textfield_widget.dart';
+import 'package:movie_app/core/imports/import_core.dart';
+import 'package:movie_app/core/imports/import_search_screen.dart';
+import 'package:movie_app/core/imports/import_internet_essentials.dart';
 
 class SearchScreen extends StatefulWidget {
   const SearchScreen({super.key});

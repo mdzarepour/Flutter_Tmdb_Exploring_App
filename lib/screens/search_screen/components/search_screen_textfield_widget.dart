@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:hugeicons/hugeicons.dart';
-import 'package:movie_app/core/constants/constant_colors.dart';
+import 'package:movie_app/core/imports/import_core.dart';
 
 class SearchScreenTextfieldWidget extends StatelessWidget {
   const SearchScreenTextfieldWidget({super.key, required this.searchMovie});

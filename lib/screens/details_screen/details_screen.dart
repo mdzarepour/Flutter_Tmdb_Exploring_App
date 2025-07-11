@@ -1,13 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:movie_app/core/theme/app_widget_theme.dart';
-import 'package:movie_app/core/utils/widgets/global_data_error_widget.dart';
-import 'package:movie_app/models/movie_model.dart';
-import 'package:movie_app/core/utils/widgets/global_loading_widget.dart';
-import 'package:movie_app/screens/details_screen/components/details_screen_overview_widget.dart';
-import 'package:movie_app/services/movie_service.dart';
-import 'package:movie_app/screens/details_screen/components/details_screen_appbar_widget.dart';
-import 'package:movie_app/screens/details_screen/components/details_screen_information_widget.dart';
-import 'package:movie_app/screens/details_screen/components/details_screen_poster_widget.dart';
+import 'package:movie_app/core/imports/import_core.dart';
+import 'package:movie_app/core/imports/import_details_screen.dart';
+import 'package:movie_app/core/imports/import_internet_essentials.dart';
 
 class DetailsScreen extends StatefulWidget {
   final int movieId;

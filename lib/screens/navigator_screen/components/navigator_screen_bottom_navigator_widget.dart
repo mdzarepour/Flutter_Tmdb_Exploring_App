@@ -1,5 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:hugeicons/hugeicons.dart';
+import 'package:movie_app/core/imports/import_core.dart';
 
 class NavigatorScreenBottomNavigatorWidget extends StatelessWidget {
   const NavigatorScreenBottomNavigatorWidget({

@@ -1,13 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:movie_app/core/utils/methods/global_show_snackbar.dart';
-import 'package:movie_app/core/utils/widgets/global_data_error_widget.dart';
-import 'package:movie_app/screens/home_screen/components/home_screen_listview_widget.dart';
-import 'package:movie_app/screens/home_screen/components/home_screen_listview_widget_title.dart';
-import 'package:movie_app/screens/home_screen/components/home_screen__slider_widget.dart';
-import 'package:movie_app/core/constants/constant_strings.dart';
-import 'package:movie_app/services/movie_service.dart';
-import 'package:movie_app/core/utils/widgets/global_loading_widget.dart';
-import 'package:movie_app/models/movie_model.dart';
+import 'package:movie_app/core/imports/import_core.dart';
+import 'package:movie_app/core/imports/import_internet_essentials.dart';
+import 'package:movie_app/core/imports/import_home_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

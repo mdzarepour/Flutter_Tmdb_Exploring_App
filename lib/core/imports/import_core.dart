@@ -1,0 +1,13 @@
+export 'package:flutter/material.dart';
+export 'package:movie_app/core/constants/constant_colors.dart';
+export 'package:movie_app/core/constants/constant_strings.dart';
+export 'package:movie_app/core/theme/app_theme.dart';
+export 'package:movie_app/core/theme/app_widget_theme.dart';
+export 'package:movie_app/core/utils/methods/global_show_snackbar.dart';
+export 'package:movie_app/core/utils/widgets/global_data_error_widget.dart';
+export 'package:movie_app/core/utils/widgets/global_divider_widget.dart';
+export 'package:movie_app/core/utils/widgets/global_image_error_widget.dart';
+export 'package:movie_app/core/utils/widgets/global_loading_widget.dart';
+export 'package:hugeicons/hugeicons.dart';
+export 'package:flutter_spinkit/flutter_spinkit.dart';
+export 'package:carousel_slider/carousel_slider.dart';

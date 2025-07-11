@@ -1,7 +1,7 @@
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/material.dart';
+import 'package:movie_app/core/imports/import_core.dart';
 import 'package:movie_app/models/movie_model.dart';
-import 'package:movie_app/screens/home_screen/components/home_screen__slider_widget_card.dart';
+
+import 'home_screen__slider_widget_card.dart';
 
 class HomeScreenSliderWidget extends StatelessWidget {
   const HomeScreenSliderWidget({super.key, required this.list});

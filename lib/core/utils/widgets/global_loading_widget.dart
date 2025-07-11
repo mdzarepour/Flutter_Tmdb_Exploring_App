@@ -1,5 +1,4 @@
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:movie_app/core/constants/constant_colors.dart';
+import 'package:movie_app/core/imports/import_core.dart';
 
 SpinKitFadingFour globalLoadingWidget() {
   return const SpinKitFadingFour(

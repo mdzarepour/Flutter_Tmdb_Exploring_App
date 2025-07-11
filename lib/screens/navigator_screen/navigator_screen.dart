@@ -1,8 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:movie_app/screens/navigator_screen/components/navigator_screen_bottom_navigator_widget.dart';
-import 'package:movie_app/screens/navigator_screen/components/navigator_screen_appbar_widget.dart';
-import 'package:movie_app/screens/home_screen/home_screen.dart';
-import 'package:movie_app/screens/search_screen/searach_screen.dart';
+import 'package:movie_app/core/imports/import_core.dart';
+import 'package:movie_app/core/imports/import_navigator_screen.dart';
+import '../home_screen/home_screen.dart';
+import '../search_screen/searach_screen.dart';
 
 class NavigatorScreen extends StatefulWidget {
   const NavigatorScreen({super.key});
