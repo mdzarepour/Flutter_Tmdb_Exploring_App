@@ -34,7 +34,7 @@ class MovieService {
     } on DioException {
       throw ('error on dio request => $DioException');
     } catch (e) {
-      throw ('overall request error => $e');
+      throw ('final request error => $e');
     }
   }
 
@@ -57,7 +57,7 @@ class MovieService {
     } on DioException {
       throw ('we have error on dio request => $DioException');
     } catch (e) {
-      throw ('overall request erro => $e');
+      throw ('final request erro => $e');
     }
   }
 }

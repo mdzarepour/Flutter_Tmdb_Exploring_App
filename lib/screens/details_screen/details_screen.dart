@@ -20,7 +20,9 @@ class _DetailsScreenState extends State<DetailsScreen> {
   }
 
   _fetchMovieDetails() async {
-    _futureMovieDetails = MovieService().getMovieDetails(widget.movieId);
+    setState(() {
+      _futureMovieDetails = MovieService().getMovieDetails(widget.movieId);
+    });
   }
 
   @override
