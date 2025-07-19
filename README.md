@@ -5,19 +5,19 @@ just for practice api injection with tmdb.org free api
 <br>
 <br>
 
-<p align="center">
+<p align="left">
 
 
-<img src="https://github.com/user-attachments/assets/58cbcc25-df2d-4eb6-a7f7-6acb0b230e46" width="200" alt="" />
+<img src="https://github.com/user-attachments/assets/58cbcc25-df2d-4eb6-a7f7-6acb0b230e46" width="300" alt="" />
 
 
-<img src="https://github.com/user-attachments/assets/cb38dbc0-f88b-43b8-adba-851a9b71d68c" width="200" alt="" />
+<img src="https://github.com/user-attachments/assets/cb38dbc0-f88b-43b8-adba-851a9b71d68c" width="300" alt="" />
 
 
-<img src="https://github.com/user-attachments/assets/9f529f64-b69b-44a2-9e39-05f4b7f37a18" width="200" alt="" />
+<img src="https://github.com/user-attachments/assets/9f529f64-b69b-44a2-9e39-05f4b7f37a18" width="300" alt="" />
 
 
-<img src="https://github.com/user-attachments/assets/46704554-3ef2-451e-89b0-0b6cf2fa34cd" width="200" alt="" />
+<img src="https://github.com/user-attachments/assets/46704554-3ef2-451e-89b0-0b6cf2fa34cd" width="300" alt="" />
 
   
 
