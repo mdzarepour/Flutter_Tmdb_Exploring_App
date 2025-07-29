@@ -19,19 +19,17 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _fetchMovieLists() {
-    setState(() {
-      _futureMovieLists = Future.wait([
-        MovieService().getMovieList(
-          url: CopnstantServiceStrings.popularVideosUrl,
-        ),
-        MovieService().getMovieList(
-          url: CopnstantServiceStrings.ratedVideosUrl,
-        ),
-        MovieService().getMovieList(
-          url: CopnstantServiceStrings.upcomingVideosUrl,
-        ),
-      ]);
-    });
+    _futureMovieLists = Future.wait([
+      MovieService().getMovieList(
+        url: CopnstantServiceStrings.popularVideosUrl,
+      ),
+      MovieService().getMovieList(
+        url: CopnstantServiceStrings.topRatedVideosUrl,
+      ),
+      MovieService().getMovieList(
+        url: CopnstantServiceStrings.upcomingVideosUrl,
+      ),
+    ]);
   }
 
   @override

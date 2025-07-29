@@ -23,7 +23,9 @@ class SearchScreenTextfieldWidget extends StatelessWidget {
           prefixIcon: Icon(HugeIcons.strokeRoundedSearch01),
           border: InputBorder.none,
         ),
-        onChanged: searchMovie,
+        onChanged: (value) {
+          searchMovie(value);
+        },
       ),
     );
   }

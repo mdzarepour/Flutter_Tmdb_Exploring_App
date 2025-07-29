@@ -14,23 +14,25 @@ class _NavigatorScreenState extends State<NavigatorScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(50),
-        child: NavigatorScreenAppbarWidget(),
-      ),
-      body: Center(
-        child: SafeArea(
-          child: IndexedStack(
-            index: selectedIndex,
-            children: const [HomeScreen(), SearchScreen()],
+    return SafeArea(
+      child: Scaffold(
+        appBar: const PreferredSize(
+          preferredSize: Size.fromHeight(50),
+          child: NavigatorScreenAppbarWidget(),
+        ),
+        body: Center(
+          child: SafeArea(
+            child: IndexedStack(
+              index: selectedIndex,
+              children: const [HomeScreen(), SearchScreen()],
+            ),
           ),
         ),
-      ),
 
-      bottomNavigationBar: NavigatorScreenBottomNavigatorWidget(
-        changeView: changeView,
-        selectedIndex: selectedIndex,
+        bottomNavigationBar: NavigatorScreenBottomNavigatorWidget(
+          changeView: changeView,
+          selectedIndex: selectedIndex,
+        ),
       ),
     );
   }

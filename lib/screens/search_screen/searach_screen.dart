@@ -11,17 +11,17 @@ class SearchScreen extends StatefulWidget {
 
 class _SearchScreenState extends State<SearchScreen> {
   late Future<List<MovieModel>> _futureTrendingMovies;
-  late List<MovieModel> trendingMovies;
+  late List<MovieModel> trendingMovies = [];
+  late List<MovieModel> constTrendingMovies = [];
 
   @override
   void initState() => [super.initState(), _fetchTrendingMovies()];
 
   _fetchTrendingMovies() async {
-    setState(() {
-      _futureTrendingMovies = MovieService().getMovieList(
-        url: CopnstantServiceStrings.trendingMoviesUrl,
-      );
-    });
+    _futureTrendingMovies = MovieService().getMovieList(
+      url: CopnstantServiceStrings.discoverMoviesPageOne,
+    );
+    constTrendingMovies = await _futureTrendingMovies;
   }
 
   @override
@@ -38,7 +38,9 @@ class _SearchScreenState extends State<SearchScreen> {
             } else if (snapshot.hasError) {
               return GlobalDataErrorWidget(fetchAgain: _fetchTrendingMovies);
             } else {
-              trendingMovies = snapshot.data!;
+              if (trendingMovies.isEmpty) {
+                trendingMovies = snapshot.data!;
+              }
               return RefreshIndicator(
                 onRefresh: () async {
                   _fetchTrendingMovies();
@@ -64,10 +66,9 @@ class _SearchScreenState extends State<SearchScreen> {
   }
 
   searchMovie(String input) async {
-    final searchList = await _futureTrendingMovies;
     setState(() {
       trendingMovies =
-          searchList.where((element) {
+          constTrendingMovies.where((element) {
             return element.originalTitle.toLowerCase().contains(
               input.toLowerCase(),
             );
